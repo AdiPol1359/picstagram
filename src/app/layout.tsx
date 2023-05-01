@@ -1,5 +1,7 @@
 import { Inter } from 'next/font/google';
 
+import { Header } from '@/components/main/Header/Header';
+
 import type { ReactNode } from 'react';
 
 import '@/styles/globals.css';
@@ -21,7 +23,10 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang="en" className={inter.variable}>
-			<body>{children}</body>
+			<body>
+				<Header />
+				{children}
+			</body>
 		</html>
 	);
 }
