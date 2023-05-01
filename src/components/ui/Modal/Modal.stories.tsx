@@ -31,7 +31,6 @@ const ExampleModal = () => {
 export const Default: Story = {
 	args: {
 		isOpen: true,
-		children: '',
 	},
 	render: () => <ExampleModal />,
 };

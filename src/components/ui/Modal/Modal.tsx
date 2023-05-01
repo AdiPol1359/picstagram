@@ -10,7 +10,7 @@ import type { ReactNode } from 'react';
 type ModalProps = Readonly<{
 	isOpen: boolean;
 	onClose: () => void;
-	children: ReactNode;
+	children?: ReactNode;
 }>;
 
 export const Modal = ({ isOpen, onClose, children }: ModalProps) => (
