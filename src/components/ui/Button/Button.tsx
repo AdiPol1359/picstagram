@@ -34,7 +34,7 @@ export const Button = ({
 		disabled={disabled}
 		onClick={onClick}
 		className={twMerge(
-			'duration-250 flex items-center gap-x-1.5 rounded-lg border px-5 py-2.5 font-medium shadow-sm transition disabled:opacity-75',
+			'duration-250 flex items-center justify-center gap-x-1.5 rounded-lg border px-5 py-2.5 font-medium shadow-sm transition disabled:opacity-75',
 			fill ? 'w-full' : 'w-fit',
 			variants[variant]
 		)}
