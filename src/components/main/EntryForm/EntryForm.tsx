@@ -1,5 +1,6 @@
-import { Button } from '../../ui/Button/Button';
 import { SocialButton } from './SocialButton';
+
+import { Button } from '@/components/ui/Button/Button';
 
 import type { ReactNode } from 'react';
 
