@@ -7,7 +7,7 @@ type ModalTitleProps = Readonly<{
 }>;
 
 export const ModalTitle = ({ children }: ModalTitleProps) => (
-	<Dialog.Title className="mb-1 text-lg font-semibold text-black">
+	<Dialog.Title className="mb-2.5 text-lg font-semibold text-black">
 		{children}
 	</Dialog.Title>
 );
