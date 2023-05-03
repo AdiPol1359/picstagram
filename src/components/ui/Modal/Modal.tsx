@@ -14,7 +14,7 @@ type ModalProps = Readonly<{
 }>;
 
 export const Modal = ({ isOpen, onClose, children }: ModalProps) => (
-	<Transition as={Fragment} show={isOpen}>
+	<Transition as={Fragment} show={isOpen} appear>
 		<Dialog onClose={onClose}>
 			<Transition.Child
 				as={Fragment}
