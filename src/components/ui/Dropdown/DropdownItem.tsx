@@ -4,14 +4,14 @@ import { twMerge } from 'tailwind-merge';
 import type { ReactNode } from 'react';
 
 type DropdownItemProps = Readonly<{
-	icon?: ReactNode;
 	onClick?: () => void;
+	icon?: ReactNode;
 	children: ReactNode;
 }>;
 
 export const DropdownItem = ({
-	icon,
 	onClick,
+	icon,
 	children,
 }: DropdownItemProps) => (
 	<Menu.Item>
