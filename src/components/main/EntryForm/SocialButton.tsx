@@ -1,36 +1,43 @@
-import { BsApple, BsFacebook, BsGoogle } from 'react-icons/bs';
+import { BsDiscord, BsFacebook } from 'react-icons/bs';
+import { FcGoogle } from 'react-icons/fc';
 import { twMerge } from 'tailwind-merge';
 
-type Variant = 'apple' | 'facebook' | 'google';
+import type { IconType } from 'react-icons';
 
-const colors: Record<Variant, string> = {
-	apple: 'bg-black',
+type Variant = 'discord' | 'facebook' | 'google';
+
+const variants: Record<Variant, string> = {
+	discord: 'bg-[#7289d9]',
 	facebook: 'bg-[#1877f2]',
-	google: 'bg-[#4285f4]',
+	google: 'border bg-white text-black',
 };
 
-const icons: Record<Variant, JSX.Element> = {
-	apple: <BsApple />,
-	facebook: <BsFacebook />,
-	google: <BsGoogle />,
+const icons: Record<Variant, IconType> = {
+	discord: BsDiscord,
+	facebook: BsFacebook,
+	google: FcGoogle,
 };
 
 type SocialButtonProps = Readonly<{
-	onClick?: () => void;
 	variant: Variant;
 	text: string;
+	onClick: () => void;
 }>;
 
-export const SocialButton = ({ onClick, variant, text }: SocialButtonProps) => (
-	<button
-		type="button"
-		onClick={onClick}
-		className={twMerge(
-			'flex w-full items-center justify-center gap-x-2 rounded-lg py-1.5 font-medium text-white',
-			colors[variant]
-		)}
-	>
-		{icons[variant]}
-		{text}
-	</button>
-);
+export const SocialButton = ({ variant, text, onClick }: SocialButtonProps) => {
+	const Icon = icons[variant];
+
+	return (
+		<button
+			type="button"
+			onClick={onClick}
+			className={twMerge(
+				'flex h-9 w-full items-center justify-center gap-x-2 rounded-lg font-medium text-white',
+				variants[variant]
+			)}
+		>
+			<Icon className="text-lg" />
+			{text}
+		</button>
+	);
+};

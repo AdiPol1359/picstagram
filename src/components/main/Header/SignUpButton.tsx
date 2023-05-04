@@ -4,16 +4,18 @@ import { SignUpModal } from '../SignUpModal';
 
 import { Button } from '@/components/ui/Button/Button';
 import { useModal } from '@/hooks/useModal';
+import { useQueryError } from '@/hooks/useQueryError';
 
 export const SignUpButton = () => {
-	const { isOpen, openModal, closeModal } = useModal();
+	const { isError, error } = useQueryError();
+	const { isOpen, openModal, closeModal } = useModal(isError);
 
 	return (
 		<>
 			<Button variant="primary" onClick={openModal}>
 				Sign up
 			</Button>
-			<SignUpModal isOpen={isOpen} onClose={closeModal} />
+			<SignUpModal error={error} isOpen={isOpen} onClose={closeModal} />
 		</>
 	);
 };
