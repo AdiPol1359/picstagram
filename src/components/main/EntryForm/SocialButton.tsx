@@ -32,7 +32,7 @@ export const SocialButton = ({ variant, text, onClick }: SocialButtonProps) => {
 			type="button"
 			onClick={onClick}
 			className={twMerge(
-				'flex w-full items-center justify-center gap-x-2 rounded-lg py-1.5 font-medium text-white',
+				'flex h-9 w-full items-center justify-center gap-x-2 rounded-lg font-medium text-white',
 				variants[variant]
 			)}
 		>
