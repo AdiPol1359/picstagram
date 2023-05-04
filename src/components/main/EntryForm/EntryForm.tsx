@@ -1,12 +1,13 @@
 import { SocialButton } from './SocialButton';
 
 import { Button } from '@/components/ui/Button/Button';
+import { signInWith } from '@/lib/auth';
 
-import type { ReactNode } from 'react';
+import type { FormEventHandler, ReactNode } from 'react';
 
 type EntryFormProps = Readonly<{
 	buttonText: string;
-	onSubmit: () => void;
+	onSubmit: FormEventHandler<HTMLFormElement>;
 	children: ReactNode;
 }>;
 
@@ -26,10 +27,22 @@ export const EntryForm = ({
 			Or continue with
 		</div>
 		<div className="grid grid-cols-2 gap-2">
-			<SocialButton variant="google" text="Google" />
-			<SocialButton variant="facebook" text="Facebook" />
+			<SocialButton
+				variant="google"
+				text="Google"
+				onClick={() => signInWith('google')}
+			/>
+			<SocialButton
+				variant="facebook"
+				text="Facebook"
+				onClick={() => signInWith('facebook')}
+			/>
 			<div className="col-span-2">
-				<SocialButton variant="apple" text="Apple" />
+				<SocialButton
+					variant="discord"
+					text="Discord"
+					onClick={() => signInWith('discord')}
+				/>
 			</div>
 		</div>
 	</>
