@@ -21,7 +21,11 @@ export const SignUpModal = ({ error, ...props }: SignUpModalProps) => (
 				<Alert variant="error">{getSignInPageErrorMessage(error)}</Alert>
 			</div>
 		)}
-		<EntryForm buttonText="Sign up" onSubmit={() => console.log('SIGN UP')}>
+		<EntryForm
+			buttonText="Sign up"
+			isLoading={false}
+			onSubmit={() => console.log('SIGN UP')}
+		>
 			<TextField
 				type="text"
 				label="Username"

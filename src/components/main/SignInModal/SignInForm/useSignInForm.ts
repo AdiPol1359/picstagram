@@ -8,18 +8,26 @@ import { signInWithCredentials } from '@/lib/auth';
 import type { TypeOf } from 'zod';
 
 interface Options {
+	readonly onSubmit: () => void;
+	readonly onSignIn: () => void;
 	readonly onUnknownError: () => void;
 }
 
-export const useSignInForm = ({ onUnknownError }: Options) => {
+export const useSignInForm = ({
+	onSubmit,
+	onSignIn,
+	onUnknownError,
+}: Options) => {
 	const { handleSubmit, setError, ...rest } = useForm<
 		TypeOf<typeof signInFormSchema>
 	>({
 		resolver: zodResolver(signInFormSchema),
 	});
 
-	const handleFormSubmit = handleSubmit(({ email, password }) =>
-		signInWithCredentials(
+	const handleFormSubmit = handleSubmit(async ({ email, password }) => {
+		onSubmit();
+
+		await signInWithCredentials(
 			{ email, password },
 			{
 				onError: (error) => {
@@ -32,8 +40,10 @@ export const useSignInForm = ({ onUnknownError }: Options) => {
 					}
 				},
 			}
-		)
-	);
+		);
+
+		onSignIn();
+	});
 
 	return { handleFormSubmit, ...rest };
 };
