@@ -28,7 +28,7 @@ export const EntryForm = ({
 		<div className="my-6 flex items-center before:mr-8 before:block before:h-[1px] before:flex-1 before:bg-gray-200 after:ml-8 after:block after:h-[1px] after:flex-1 after:bg-gray-200">
 			Or continue with
 		</div>
-		<div className="grid grid-cols-2 gap-2">
+		<div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
 			<SocialButton
 				variant="google"
 				text="Google"
@@ -39,7 +39,7 @@ export const EntryForm = ({
 				text="Facebook"
 				onClick={() => signInWith('facebook')}
 			/>
-			<div className="col-span-2">
+			<div className="col-span-1 sm:col-span-2">
 				<SocialButton
 					variant="discord"
 					text="Discord"
