@@ -1,4 +1,4 @@
-import { signIn } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
 
 export const signInWithCredentials = async (
 	{
@@ -23,3 +23,5 @@ export const signInWithCredentials = async (
 
 export const signInWith = (provider: 'discord' | 'facebook' | 'google') =>
 	signIn(provider, { callbackUrl: '/' });
+
+export const signOutUser = () => signOut({ redirect: false });

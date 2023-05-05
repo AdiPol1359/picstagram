@@ -1,6 +1,6 @@
 'use client';
 
-import { SignInModal } from '../SignInModal/SignInModal';
+import { SignInModal } from '../../SignInModal/SignInModal';
 
 import { Button } from '@/components/ui/Button/Button';
 import { useModal } from '@/hooks/useModal';
