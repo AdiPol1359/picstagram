@@ -22,4 +22,4 @@ export const signInWithCredentials = async (
 };
 
 export const signInWith = (provider: 'discord' | 'facebook' | 'google') =>
-	signIn(provider);
+	signIn(provider, { callbackUrl: '/' });
