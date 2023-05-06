@@ -5,7 +5,7 @@ import { AppProviders } from '@/providers/AppProviders';
 
 import type { ReactNode } from 'react';
 
-import '@/styles/globals.css';
+import '@/assets/styles/globals.css';
 
 export const metadata = {
 	title: 'Create Next App',
