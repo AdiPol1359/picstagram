@@ -6,7 +6,7 @@ import DiscordProvider from 'next-auth/providers/discord';
 import FacebookProvider from 'next-auth/providers/facebook';
 import GoogleProvider from 'next-auth/providers/google';
 
-import { serverEnv } from '@/env/server';
+import { serverEnv } from '@/lib/env/server';
 import { prisma } from '@/lib/prisma';
 
 import type { AuthOptions } from 'next-auth';
