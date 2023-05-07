@@ -1,7 +1,7 @@
 import { useSession } from 'next-auth/react';
 
 import { Avatar } from '@/components/ui/Avatar/Avatar';
-import { getFirstLetter } from '@/utils/string';
+import { getFirstLetter } from '@/lib/utils';
 
 export const UserAvatar = () => {
 	const { data } = useSession();

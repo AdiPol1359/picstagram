@@ -4,7 +4,7 @@ import { Modal } from '../ui/Modal/Modal';
 import { TextField } from '../ui/TextField/TextField';
 import { EntryForm } from './EntryForm/EntryForm';
 
-import { getSignInPageErrorMessage } from '@/utils/auth-error';
+import { getSignInPageErrorMessage } from '@/lib/auth-errors';
 
 import type { ComponentProps } from 'react';
 
