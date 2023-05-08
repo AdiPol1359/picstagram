@@ -10,8 +10,6 @@ export const UserAvatar = () => {
 
 	const { name, image } = data.user;
 
-	console.log(data.user.id, data.user.username);
-
 	if (image) {
 		return <Avatar src={image} alt={name} />;
 	}
