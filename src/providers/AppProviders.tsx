@@ -3,6 +3,8 @@
 import { SessionProvider } from 'next-auth/react';
 import { Toaster } from 'react-hot-toast';
 
+import { TrpcProvider } from './TrpcProvider';
+
 import type { ReactNode } from 'react';
 
 type AppProvidersProps = Readonly<{
@@ -11,7 +13,9 @@ type AppProvidersProps = Readonly<{
 
 export const AppProviders = ({ children }: AppProvidersProps) => (
 	<SessionProvider>
-		{children}
-		<Toaster position="top-right" />
+		<TrpcProvider>
+			{children}
+			<Toaster position="top-right" />
+		</TrpcProvider>
 	</SessionProvider>
 );
