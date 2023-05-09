@@ -1,4 +1,4 @@
-import { createTRPCReact } from '@trpc/react-query';
+import { createTRPCReact, TRPCClientError } from '@trpc/react-query';
 
 import type { AppRouter } from '@/server/router';
 
@@ -17,5 +17,9 @@ export const getBaseUrl = () => {
 
 	return `http://localhost:${process.env.PORT ?? 3000}`;
 };
+
+export const isTRPCClientError = (
+	cause: unknown
+): cause is TRPCClientError<AppRouter> => cause instanceof TRPCClientError;
 
 export const trpc = createTRPCReact<AppRouter>();

@@ -1,6 +1,6 @@
 'use client';
 
-import { SignUpModal } from '../../SignUpModal';
+import { SignUpModal } from '../../SignUpModal/SignUpModal';
 
 import { Button } from '@/components/ui/Button/Button';
 import { useModal } from '@/hooks/useModal';
