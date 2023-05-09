@@ -1,5 +1,4 @@
-const DEFAULT_ERROR_MESSAGE =
-	'An unexpected error occurred while creating your account!';
+import { DEFAULT_ERROR_MESSAGE } from './constants';
 
 const signInPageErrorMessages: Record<string, string> = {
 	OAuthAccountNotLinked:
