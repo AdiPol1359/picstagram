@@ -23,10 +23,7 @@ export const useCreateUser = () => {
 		createUserMutation.mutate(
 			{ username, name, email, password },
 			{
-				onSuccess: (data) => {
-					console.log(data);
-					onSuccess?.();
-				},
+				onSuccess,
 				onError: (err) => {
 					if (isTRPCClientError(err)) {
 						switch (err.data?.code) {
