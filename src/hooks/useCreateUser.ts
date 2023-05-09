@@ -1,4 +1,4 @@
-import { isTRPCClientError, trpc } from '@/lib/trpc';
+import { isTRPCClientError, trpc } from '@/lib/utils/trpc';
 
 interface UserPayload {
 	readonly username: string;

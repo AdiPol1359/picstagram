@@ -1,6 +1,6 @@
 import { initTRPC } from '@trpc/server';
 
-import { isPrismaError } from '@/lib/prisma-errors';
+import { isPrismaError } from '@/lib/utils/prisma-errors';
 
 import type { Context } from './context';
 

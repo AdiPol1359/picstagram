@@ -1,4 +1,4 @@
-import { DEFAULT_ERROR_MESSAGE } from './constants';
+import { DEFAULT_ERROR_MESSAGE } from '../constants';
 
 const signInPageErrorMessages: Record<string, string> = {
 	OAuthAccountNotLinked:
