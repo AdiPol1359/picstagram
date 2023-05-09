@@ -2,7 +2,7 @@ import { TRPCError } from '@trpc/server';
 
 import { createUser } from './users.service';
 
-import { isPrismaError, prismaErrors } from '@/lib/prisma-errors';
+import { isPrismaError, prismaErrors } from '@/lib/utils/prisma-errors';
 
 import type { CreateUserInput } from './users.schemas';
 

@@ -2,7 +2,7 @@ import { SignUpForm } from './SignUpForm/SignUpForm';
 
 import { Alert } from '@/components/ui/Alert/Alert';
 import { Modal } from '@/components/ui/Modal/Modal';
-import { getSignInPageErrorMessage } from '@/lib/auth-errors';
+import { getSignInPageErrorMessage } from '@/lib/utils/auth-errors';
 
 import type { ComponentProps } from 'react';
 
