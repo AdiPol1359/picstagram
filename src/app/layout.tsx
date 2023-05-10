@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google';
 
 import { Header } from '@/components/main/Header/Header';
+import { Container } from '@/components/ui/Container/Container';
 import { AppProviders } from '@/providers/AppProviders';
 
 import type { ReactNode } from 'react';
@@ -27,7 +28,7 @@ export default function RootLayout({
 			<body>
 				<AppProviders>
 					<Header />
-					{children}
+					<Container as="main">{children}</Container>
 				</AppProviders>
 			</body>
 		</html>
