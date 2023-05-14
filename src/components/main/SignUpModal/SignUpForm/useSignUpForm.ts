@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { signUpFormSchema } from './SignUpForm.schemas';
 
 import { useCreateUser } from '@/hooks/useCreateUser';
-import { capitalize, isObjectKey } from '@/lib/utils';
+import { capitalize, isObjectKey } from '@/lib/utils/utils';
 
 import type { TypeOf } from 'zod';
 
