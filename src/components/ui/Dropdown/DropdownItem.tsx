@@ -19,7 +19,7 @@ export const DropdownItem = ({
 			<button
 				onClick={onClick}
 				className={twMerge(
-					'duration-250 flex items-center gap-x-1.5 whitespace-nowrap rounded-md px-3.5 py-2.5 text-sm transition-colors',
+					'duration-250 flex w-full items-center gap-x-1.5 whitespace-nowrap rounded-md px-3.5 py-2.5 text-sm transition-colors',
 					active && 'bg-primary-400 text-white'
 				)}
 			>
