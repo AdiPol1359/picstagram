@@ -24,7 +24,7 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
-  @@map("accounts")
+  @@map("account")
 }
 
 model User {
@@ -37,7 +37,7 @@ model User {
   image         String?
   accounts      Account[]
 
-  @@map("users")
+  @@map("user")
 }
 
 model VerificationToken {
@@ -46,5 +46,5 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
-  @@map("verificationtokens")
+  @@map("verification_token")
 }
