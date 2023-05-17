@@ -1,12 +1,14 @@
-import { useSession } from 'next-auth/react';
-
 import { UserAvatar } from '@/components/common/UserAvatar';
 import { Dropdown } from '@/components/ui/Dropdown/Dropdown';
 
-export const UserMenuButton = () => {
-	const { data } = useSession();
+import type { Session } from 'next-auth';
 
-	return (
-		<Dropdown.Button>{data && <UserAvatar user={data.user} />}</Dropdown.Button>
-	);
-};
+type UserMenuButtonProps = Readonly<{
+	user: Session['user'];
+}>;
+
+export const UserMenuButton = ({ user }: UserMenuButtonProps) => (
+	<Dropdown.Button>
+		<UserAvatar user={user} />
+	</Dropdown.Button>
+);
