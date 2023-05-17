@@ -1,7 +1,7 @@
 'use client';
 
 import { SignOutButton } from './SignOutButton';
-import { UserAvatar } from './UserAvatar';
+import { UserMenuButton } from './UserMenuButton';
 
 import { PrivateElement } from '@/components/common/PrivateElement';
 import { Dropdown } from '@/components/ui/Dropdown/Dropdown';
@@ -9,9 +9,7 @@ import { Dropdown } from '@/components/ui/Dropdown/Dropdown';
 export const UserMenu = () => (
 	<PrivateElement>
 		<Dropdown>
-			<Dropdown.Button>
-				<UserAvatar />
-			</Dropdown.Button>
+			<UserMenuButton />
 			<Dropdown.Items>
 				<SignOutButton />
 			</Dropdown.Items>

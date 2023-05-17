@@ -28,14 +28,17 @@ model Account {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String         @id @default(cuid())
   name          String?
-  username      String?   @unique
-  email         String?   @unique
-  password      String?   @unique
-  emailVerified DateTime? @map("email_verified")
+  username      String?        @unique
+  email         String?        @unique
+  password      String?        @unique
+  emailVerified DateTime?      @map("email_verified")
   image         String?
+  biography     String?
   accounts      Account[]
+  follower      UsersFollows[] @relation("following")
+  following     UsersFollows[] @relation("follower")
 
   @@map("user")
 }
@@ -47,4 +50,14 @@ model VerificationToken {
 
   @@unique([identifier, token])
   @@map("verification_token")
+}
+
+model UsersFollows {
+  followerId  String @map("follower_id")
+  followingId String @map("following_id")
+  follower    User   @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User   @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@id([followerId, followingId])
+  @@map("users_follows")
 }
