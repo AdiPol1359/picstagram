@@ -1,10 +1,11 @@
 import { TRPCError } from '@trpc/server';
 
-import { createUser } from './users.service';
+import { mapPrismaUserToUser } from './users.mapper';
+import { createUser, getUserByUsername } from './users.service';
 
 import { isPrismaError, prismaErrors } from '@/lib/utils/prisma-errors';
 
-import type { CreateUserInput } from './users.schemas';
+import type { CreateUserInput, GetUserByUsernameInput } from './users.schemas';
 
 export const createUserHandler = async ({
 	username,
@@ -13,7 +14,9 @@ export const createUserHandler = async ({
 	password,
 }: CreateUserInput) => {
 	try {
-		return await createUser({ username, name, email, password });
+		return mapPrismaUserToUser(
+			await createUser({ username, name, email, password })
+		);
 	} catch (err) {
 		if (isPrismaError(err, prismaErrors.UniqueKeyViolation)) {
 			throw new TRPCError({
@@ -25,4 +28,19 @@ export const createUserHandler = async ({
 
 		throw err;
 	}
+};
+
+export const getUserByUsernameHandler = async ({
+	username,
+}: GetUserByUsernameInput) => {
+	const user = await getUserByUsername(username);
+
+	if (!user) {
+		throw new TRPCError({
+			code: 'NOT_FOUND',
+			message: 'User not found!',
+		});
+	}
+
+	return mapPrismaUserToUser(user);
 };

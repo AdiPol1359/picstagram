@@ -15,6 +15,12 @@ export const userSchema = z.object({
 	username: z.string().nullable(),
 	name: z.string().nullable(),
 	image: z.string().nullable(),
+	biography: z.string().nullable(),
+	statistics: z.object({
+		photos: z.number(),
+		followers: z.number(),
+		following: z.number(),
+	}),
 });
 
 export const createUserSchema = z.object({
@@ -24,4 +30,10 @@ export const createUserSchema = z.object({
 	password: z.string().min(PASSWORD_MIN_LENGTH).max(PASSWORD_MAX_LENGTH),
 });
 
+export const getUserByUsernameSchema = z.object({
+	username: z.string(),
+});
+
+export type User = TypeOf<typeof userSchema>;
 export type CreateUserInput = TypeOf<typeof createUserSchema>;
+export type GetUserByUsernameInput = TypeOf<typeof getUserByUsernameSchema>;
