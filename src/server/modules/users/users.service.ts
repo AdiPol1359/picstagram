@@ -1,4 +1,4 @@
-import { hash } from 'bcrypt';
+import { compare, hash } from 'bcrypt';
 
 import { prisma } from '@/lib/prisma';
 
@@ -8,6 +8,7 @@ export const select = {
 	id: true,
 	name: true,
 	username: true,
+	password: true,
 	image: true,
 	biography: true,
 	_count: { select: { follower: true, following: true } },
@@ -28,6 +29,22 @@ export const createUser = async ({
 		data: { username, name, email, password: await hash(password, 10) },
 		select,
 	});
+
+export const getUserByCredentials = async ({
+	email,
+	password,
+}: {
+	email: string;
+	password: string;
+}) => {
+	const user = await prisma.user.findUnique({ where: { email }, select });
+
+	if (!user?.password || !(await compare(password, user.password))) {
+		return null;
+	}
+
+	return user;
+};
 
 export const getUserByUsername = (username: string) =>
 	prisma.user.findUnique({ where: { username }, select });

@@ -1,5 +1,4 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
-import { compare } from 'bcrypt';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import DiscordProvider from 'next-auth/providers/discord';
 import FacebookProvider from 'next-auth/providers/facebook';
@@ -7,6 +6,7 @@ import GoogleProvider from 'next-auth/providers/google';
 
 import { serverEnv } from '@/lib/env/server';
 import { prisma } from '@/lib/prisma';
+import { getUserByCredentials } from '@/server/modules/users/users.service';
 
 import type { AuthOptions } from 'next-auth';
 
@@ -52,20 +52,12 @@ export const authOptions: AuthOptions = {
 				email: {},
 				password: {},
 			},
-			authorize: async (credentials) => {
-				const user = await prisma.user.findUnique({
-					where: { email: credentials?.email },
-				});
-
-				if (
-					!credentials ||
-					!user?.password ||
-					!(await compare(credentials.password, user.password))
-				) {
+			authorize: (credentials) => {
+				if (!credentials) {
 					return null;
 				}
 
-				return user;
+				return getUserByCredentials(credentials);
 			},
 		}),
 	],
