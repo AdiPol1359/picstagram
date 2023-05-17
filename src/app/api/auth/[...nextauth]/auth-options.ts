@@ -6,7 +6,10 @@ import GoogleProvider from 'next-auth/providers/google';
 
 import { serverEnv } from '@/lib/env/server';
 import { prisma } from '@/lib/prisma';
-import { getUserByCredentials } from '@/server/modules/users/users.service';
+import {
+	getUserByCredentials,
+	initCreatedUser,
+} from '@/server/modules/users/users.service';
 
 import type { AuthOptions } from 'next-auth';
 
@@ -32,6 +35,15 @@ export const authOptions: AuthOptions = {
 			}
 
 			return token;
+		},
+	},
+	events: {
+		createUser: async ({ user: createdUser }) => {
+			const user = await initCreatedUser(createdUser);
+
+			if (user) {
+				createdUser.username = user.username;
+			}
 		},
 	},
 	providers: [

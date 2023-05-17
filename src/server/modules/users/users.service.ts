@@ -1,8 +1,11 @@
 import { compare, hash } from 'bcrypt';
 
+import { generateUsername } from './users.utils';
+
 import { prisma } from '@/lib/prisma';
 
 import type { Prisma } from '@prisma/client';
+import type { User } from 'next-auth';
 
 export const select = {
 	id: true,
@@ -48,3 +51,13 @@ export const getUserByCredentials = async ({
 
 export const getUserByUsername = (username: string) =>
 	prisma.user.findUnique({ where: { username }, select });
+
+export const initCreatedUser = ({ id, email, username }: User) => {
+	if (username || !email) return null;
+
+	return prisma.user.update({
+		where: { id },
+		data: { username: generateUsername({ email }) },
+		select,
+	});
+};
