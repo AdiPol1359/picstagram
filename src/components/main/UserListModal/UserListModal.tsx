@@ -23,7 +23,7 @@ export const UserListModal = ({
 	<Modal {...props}>
 		<Modal.Title>{title}</Modal.Title>
 		<LoadingContent isLoading={isLoading}>
-			<ul className="max-h-96 divide-y overflow-auto">
+			<ul className="app-scrollbar max-h-96 divide-y overflow-auto">
 				{users.map((user) => (
 					<UserItem key={user.id} user={user} />
 				))}
