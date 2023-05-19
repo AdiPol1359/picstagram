@@ -18,8 +18,10 @@ export const UserStatistics = ({
 		statistics: { photos, followers, following },
 	},
 }: UserStatisticsProps) => {
-	const { followers: userFollowers } = useGetFollowers(id);
-	const { following: userFollowing } = useGetFollowing(id);
+	const { followers: userFollowers, isLoading: isFollowersLoading } =
+		useGetFollowers(id);
+	const { following: userFollowing, isLoading: isFollowingLoading } =
+		useGetFollowing(id);
 
 	return (
 		<ul className="flex justify-between">
@@ -28,11 +30,13 @@ export const UserStatistics = ({
 				name="Followers"
 				value={followers}
 				users={userFollowers}
+				isLoading={isFollowersLoading}
 			/>
 			<UserListModalStatisticItem
 				name="Following"
 				value={following}
 				users={userFollowing}
+				isLoading={isFollowingLoading}
 			/>
 		</ul>
 	);
