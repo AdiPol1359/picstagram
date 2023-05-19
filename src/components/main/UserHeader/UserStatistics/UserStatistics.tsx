@@ -8,16 +8,16 @@ import { useGetFollowing } from '@/hooks/useGetFollowing';
 
 import type { User } from '@/server/modules/users/users.schemas';
 
-type UserStatisticsListProps = Readonly<{
+type UserStatisticsProps = Readonly<{
 	user: User;
 }>;
 
-export const UserStatisticsList = ({
+export const UserStatistics = ({
 	user: {
 		id,
 		statistics: { photos, followers, following },
 	},
-}: UserStatisticsListProps) => {
+}: UserStatisticsProps) => {
 	const { followers: userFollowers } = useGetFollowers(id);
 	const { following: userFollowing } = useGetFollowing(id);
 
