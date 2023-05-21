@@ -15,5 +15,5 @@ export const usersRouter = router({
 	getByUsername: publicProcedure
 		.input(getUserByUsernameSchema)
 		.output(userSchema)
-		.query(({ input }) => getUserByUsernameHandler(input)),
+		.query(({ ctx, input }) => getUserByUsernameHandler(ctx, input)),
 });

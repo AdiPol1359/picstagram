@@ -1,7 +1,8 @@
 import Link from 'next/link';
 
+import { FollowButton } from '../FollowButton';
+
 import { UserAvatar } from '@/components/common/UserAvatar';
-import { Button } from '@/components/ui/Button/Button';
 
 import type { User } from '@/server/modules/users/users.schemas';
 
@@ -18,6 +19,6 @@ export const UserItem = ({ user }: UserItemProps) => (
 			<UserAvatar user={user} size="sm" />
 			<h3 className="font-medium">{user.username}</h3>
 		</Link>
-		<Button>Follow</Button>
+		<FollowButton user={user} />
 	</li>
 );

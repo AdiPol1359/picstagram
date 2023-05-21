@@ -1,18 +1,54 @@
 import { mapPrismaUserToUser } from '../users/users.mapper';
-import { getFollows } from './follows.service';
+import { createFollow, deleteFollow, getFollows } from './follows.service';
 
-import type { GetFollowsInput } from './follows.schemas';
+import type {
+	CreateFollowInput,
+	DeleteFollowInput,
+	GetFollowsInput,
+} from './follows.schemas';
 
-export const getFollowersHandler = async ({ userId }: GetFollowsInput) => {
-	const follows = await getFollows({ followingId: userId });
+import type { Context, ProtectedContext } from '@/server/context';
+
+export const getFollowersHandler = async (
+	{ session }: Context,
+	{ userId }: GetFollowsInput
+) => {
+	const follows = await getFollows(
+		{
+			followingId: userId,
+		},
+		session?.user.id
+	);
 	const followers = follows.map(({ follower }) => follower).filter(Boolean);
 
 	return followers.map(mapPrismaUserToUser);
 };
 
-export const getFollowingHandler = async ({ userId }: GetFollowsInput) => {
-	const follows = await getFollows({ followerId: userId });
+export const getFollowingHandler = async (
+	{ session }: Context,
+	{ userId }: GetFollowsInput
+) => {
+	const follows = await getFollows(
+		{
+			followerId: userId,
+		},
+		session?.user.id
+	);
 	const following = follows.map(({ following }) => following).filter(Boolean);
 
 	return following.map(mapPrismaUserToUser);
+};
+
+export const createFollowHandler = async (
+	{ session }: ProtectedContext,
+	{ userId }: CreateFollowInput
+) => {
+	await createFollow({ followerId: session.user.id, followingId: userId });
+};
+
+export const deleteFollowHandler = async (
+	{ session }: ProtectedContext,
+	{ userId }: DeleteFollowInput
+) => {
+	await deleteFollow({ followerId: session.user.id, followingId: userId });
 };

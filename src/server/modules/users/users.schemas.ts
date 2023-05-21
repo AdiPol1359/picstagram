@@ -16,6 +16,7 @@ export const userSchema = z.object({
 	name: z.string().nullable(),
 	image: z.string().nullable(),
 	biography: z.string().nullable(),
+	follow: z.boolean().optional(),
 	statistics: z.object({
 		photos: z.number(),
 		followers: z.number(),

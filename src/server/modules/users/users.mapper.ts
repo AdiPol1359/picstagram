@@ -1,8 +1,10 @@
 import type { User } from './users.schemas';
-import type { select } from './users.service';
+import type { createUserSelect } from './users.utils';
 import type { Prisma } from '@prisma/client';
 
-type PrismaUser = Prisma.UserGetPayload<{ select: typeof select }>;
+type PrismaUser = Prisma.UserGetPayload<{
+	select: ReturnType<typeof createUserSelect>;
+}>;
 
 export const mapPrismaUserToUser = ({
 	id,
@@ -10,6 +12,7 @@ export const mapPrismaUserToUser = ({
 	username,
 	image,
 	biography,
+	follower,
 	_count: { follower: followers, following },
 }: PrismaUser): User => ({
 	id,
@@ -18,4 +21,5 @@ export const mapPrismaUserToUser = ({
 	image,
 	biography,
 	statistics: { followers, following, photos: 0 },
+	...(!!follower && { follow: follower.length > 0 }),
 });

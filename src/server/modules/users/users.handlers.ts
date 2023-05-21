@@ -7,6 +7,8 @@ import { isPrismaError, prismaErrors } from '@/lib/utils/prisma-errors';
 
 import type { CreateUserInput, GetUserByUsernameInput } from './users.schemas';
 
+import type { Context } from '@/server/context';
+
 export const createUserHandler = async ({
 	username,
 	name,
@@ -30,10 +32,11 @@ export const createUserHandler = async ({
 	}
 };
 
-export const getUserByUsernameHandler = async ({
-	username,
-}: GetUserByUsernameInput) => {
-	const user = await getUserByUsername(username);
+export const getUserByUsernameHandler = async (
+	{ session }: Context,
+	{ username }: GetUserByUsernameInput
+) => {
+	const user = await getUserByUsername(username, session?.user.id);
 
 	if (!user) {
 		throw new TRPCError({
