@@ -11,3 +11,6 @@ export const createContext = async () => {
 };
 
 export type Context = inferAsyncReturnType<typeof createContext>;
+export type ProtectedContext = Omit<Context, 'session'> & {
+	session: NonNullable<Context['session']>;
+};

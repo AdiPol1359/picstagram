@@ -1,15 +1,31 @@
-import { getFollowersHandler, getFollowingHandler } from './follows.handlers';
-import { followsSchema, getFollowsSchema } from './follows.schemas';
+import {
+	createFollowHandler,
+	deleteFollowHandler,
+	getFollowersHandler,
+	getFollowingHandler,
+} from './follows.handlers';
+import {
+	createFollowSchema,
+	deleteFollowSchema,
+	followsSchema,
+	getFollowsSchema,
+} from './follows.schemas';
 
-import { publicProcedure, router } from '@/server/trpc';
+import { protectedProcedure, publicProcedure, router } from '@/server/trpc';
 
 export const followsRouter = router({
 	getFollowers: publicProcedure
 		.input(getFollowsSchema)
 		.output(followsSchema)
-		.query(({ input }) => getFollowersHandler(input)),
+		.query(({ ctx, input }) => getFollowersHandler(ctx, input)),
 	getFollowing: publicProcedure
 		.input(getFollowsSchema)
 		.output(followsSchema)
-		.query(({ input }) => getFollowingHandler(input)),
+		.query(({ ctx, input }) => getFollowingHandler(ctx, input)),
+	createFollow: protectedProcedure
+		.input(createFollowSchema)
+		.mutation(({ ctx, input }) => createFollowHandler(ctx, input)),
+	deleteFollow: protectedProcedure
+		.input(deleteFollowSchema)
+		.mutation(({ ctx, input }) => deleteFollowHandler(ctx, input)),
 });

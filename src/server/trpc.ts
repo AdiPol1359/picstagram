@@ -1,4 +1,4 @@
-import { initTRPC } from '@trpc/server';
+import { initTRPC, TRPCError } from '@trpc/server';
 
 import { isPrismaError } from '@/lib/utils/prisma-errors';
 
@@ -16,5 +16,14 @@ const t = initTRPC.context<Context>().create({
 	}),
 });
 
+const isAuthed = t.middleware(({ ctx: { session }, next }) => {
+	if (!session) {
+		throw new TRPCError({ code: 'UNAUTHORIZED' });
+	}
+
+	return next({ ctx: { session } });
+});
+
 export const router = t.router;
 export const publicProcedure = t.procedure;
+export const protectedProcedure = t.procedure.use(isAuthed);

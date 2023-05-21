@@ -1,21 +1,10 @@
 import { compare, hash } from 'bcrypt';
 
-import { generateUsername } from './users.utils';
+import { createUserSelect, generateUsername } from './users.utils';
 
 import { prisma } from '@/lib/prisma';
 
-import type { Prisma } from '@prisma/client';
 import type { User } from 'next-auth';
-
-export const select = {
-	id: true,
-	name: true,
-	username: true,
-	password: true,
-	image: true,
-	biography: true,
-	_count: { select: { follower: true, following: true } },
-} satisfies Prisma.UserSelect;
 
 export const createUser = async ({
 	username,
@@ -30,7 +19,7 @@ export const createUser = async ({
 }) =>
 	prisma.user.create({
 		data: { username, name, email, password: await hash(password, 10) },
-		select,
+		select: createUserSelect(),
 	});
 
 export const getUserByCredentials = async ({
@@ -40,7 +29,10 @@ export const getUserByCredentials = async ({
 	email: string;
 	password: string;
 }) => {
-	const user = await prisma.user.findUnique({ where: { email }, select });
+	const user = await prisma.user.findUnique({
+		where: { email },
+		select: createUserSelect(),
+	});
 
 	if (!user?.password || !(await compare(password, user.password))) {
 		return null;
@@ -49,8 +41,11 @@ export const getUserByCredentials = async ({
 	return user;
 };
 
-export const getUserByUsername = (username: string) =>
-	prisma.user.findUnique({ where: { username }, select });
+export const getUserByUsername = (username: string, followerId?: string) =>
+	prisma.user.findUnique({
+		where: { username },
+		select: createUserSelect({ followerId }),
+	});
 
 export const initCreatedUser = ({ id, email, username }: User) => {
 	if (username || !email) return null;
@@ -58,6 +53,6 @@ export const initCreatedUser = ({ id, email, username }: User) => {
 	return prisma.user.update({
 		where: { id },
 		data: { username: generateUsername({ email }) },
-		select,
+		select: createUserSelect(),
 	});
 };
