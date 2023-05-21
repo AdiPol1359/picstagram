@@ -41,14 +41,14 @@ export const getFollowingHandler = async (
 
 export const createFollowHandler = async (
 	{ session }: ProtectedContext,
-	{ followingId }: CreateFollowInput
+	{ userId }: CreateFollowInput
 ) => {
-	await createFollow({ followerId: session.user.id, followingId });
+	await createFollow({ followerId: session.user.id, followingId: userId });
 };
 
 export const deleteFollowHandler = async (
 	{ session }: ProtectedContext,
-	{ followingId }: DeleteFollowInput
+	{ userId }: DeleteFollowInput
 ) => {
-	await deleteFollow({ followerId: session.user.id, followingId });
+	await deleteFollow({ followerId: session.user.id, followingId: userId });
 };

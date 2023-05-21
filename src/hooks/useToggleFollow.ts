@@ -13,11 +13,11 @@ export const useToggleFollow = (initialState: boolean) => {
 	const isLoading =
 		createFollowMutation.isLoading || deleteFollowMutation.isLoading;
 
-	const toggleFollow = async ({ followingId }: { followingId: string }) => {
+	const toggleFollow = async ({ userId }: { userId: string }) => {
 		if (isFollowing) {
-			await deleteFollowMutation.mutateAsync({ followingId });
+			await deleteFollowMutation.mutateAsync({ userId });
 		} else {
-			await createFollowMutation.mutateAsync({ followingId });
+			await createFollowMutation.mutateAsync({ userId });
 		}
 
 		router.refresh();

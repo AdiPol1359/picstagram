@@ -11,11 +11,11 @@ export const getFollowsSchema = z.object({
 });
 
 export const createFollowSchema = z.object({
-	followingId: z.string(),
+	userId: z.string(),
 });
 
 export const deleteFollowSchema = z.object({
-	followingId: z.string(),
+	userId: z.string(),
 });
 
 export type GetFollowsInput = TypeOf<typeof getFollowsSchema>;

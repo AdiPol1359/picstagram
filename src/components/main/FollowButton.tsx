@@ -23,10 +23,7 @@ export const FollowButton = ({ user: { id, follow } }: FollowButtonProps) => {
 	}
 
 	return (
-		<Button
-			disabled={isLoading}
-			onClick={() => toggleFollow({ followingId: id })}
-		>
+		<Button disabled={isLoading} onClick={() => toggleFollow({ userId: id })}>
 			{isFollowing ? 'Unfollow' : 'Follow'}
 		</Button>
 	);
