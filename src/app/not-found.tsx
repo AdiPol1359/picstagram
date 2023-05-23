@@ -1,6 +1,6 @@
 export default function NotFound() {
 	return (
-		<hgroup className="mt-10 text-center">
+		<hgroup className="text-center">
 			<h1 className="text-2xl font-semibold">
 				Sorry, this page is unavailable
 			</h1>

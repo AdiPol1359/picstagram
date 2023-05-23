@@ -11,7 +11,7 @@ type UserHeaderProps = Readonly<{
 }>;
 
 export const UserHeader = ({ user }: UserHeaderProps) => (
-	<header className="mx-auto mt-6 flex w-full max-w-xl flex-col items-center justify-between gap-y-5 px-2 sm:flex-row sm:px-0">
+	<header className="mx-auto flex w-full max-w-xl flex-col items-center justify-between gap-y-5 px-2 sm:flex-row sm:px-0">
 		<UserAvatar user={user} size="xl" />
 		<section className="w-full space-y-5 sm:max-w-xs">
 			<UserCta user={user} />
