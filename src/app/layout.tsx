@@ -31,7 +31,9 @@ export default function RootLayout({
 			<body>
 				<AppProviders>
 					<Header />
-					<Container as="main">{children}</Container>
+					<Container as="main" className="py-9">
+						{children}
+					</Container>
 				</AppProviders>
 			</body>
 		</html>
