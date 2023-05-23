@@ -36,6 +36,8 @@ model User {
   emailVerified DateTime?      @map("email_verified")
   image         String?
   biography     String?
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
   accounts      Account[]
   follower      UsersFollows[] @relation("following")
   following     UsersFollows[] @relation("follower")
@@ -53,10 +55,12 @@ model VerificationToken {
 }
 
 model UsersFollows {
-  followerId  String @map("follower_id")
-  followingId String @map("following_id")
-  follower    User   @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
-  following   User   @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+  followerId  String   @map("follower_id")
+  followingId String   @map("following_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  follower    User     @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User     @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
 
   @@id([followerId, followingId])
   @@map("users_follows")
