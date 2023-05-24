@@ -15,6 +15,7 @@ type FollowButtonProps = Readonly<{
 
 export const FollowButton = ({ user: { id, follow } }: FollowButtonProps) => {
 	const requiredSession = useRequiredSession();
+
 	const { data } = useSession();
 	const { toggleFollow, isFollowing, isLoading } = useToggleFollow(
 		Boolean(follow)
