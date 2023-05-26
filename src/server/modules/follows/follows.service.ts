@@ -25,6 +25,7 @@ export const getFollows = (
 				follower: { select: createUserSelect({ followerId: sessionUserId }) },
 			}),
 		},
+		orderBy: { createdAt: 'desc' },
 	});
 
 export const createFollow = ({

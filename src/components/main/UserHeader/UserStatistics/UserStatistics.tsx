@@ -1,10 +1,10 @@
 'use client';
 
 import { StatisticItem } from './StatisticItem';
-import { UserListModalStatisticItem } from './UserListModalStatisticItem';
+import { UserFollowersModal } from './UserFollowersModal/UserFollowersModal';
+import { UserFollowingModal } from './UserFollowingModal/UserFollowingModal';
 
-import { useGetFollowers } from '@/hooks/useGetFollowers';
-import { useGetFollowing } from '@/hooks/useGetFollowing';
+import { useModal } from '@/hooks/useModal';
 
 import type { User } from '@/server/modules/users/users.schemas';
 
@@ -18,26 +18,43 @@ export const UserStatistics = ({
 		statistics: { photos, followers, following },
 	},
 }: UserStatisticsProps) => {
-	const { followers: userFollowers, isLoading: isFollowersLoading } =
-		useGetFollowers(id);
-	const { following: userFollowing, isLoading: isFollowingLoading } =
-		useGetFollowing(id);
+	const {
+		isOpen: isUserFollowersOpen,
+		openModal: openUserFollowersModal,
+		closeModal: closeUserFollowersModal,
+	} = useModal();
+
+	const {
+		isOpen: isUserFollowingOpen,
+		openModal: openUserFollowingModal,
+		closeModal: closeUserFollowingModal,
+	} = useModal();
 
 	return (
-		<ul className="flex justify-between">
-			<StatisticItem name="Photos" value={photos} />
-			<UserListModalStatisticItem
-				name="Followers"
-				value={followers}
-				users={userFollowers}
-				isLoading={isFollowersLoading}
+		<>
+			<ul className="flex justify-between">
+				<StatisticItem name="Photos" value={photos} />
+				<StatisticItem
+					name="Followers"
+					value={followers}
+					onClick={openUserFollowersModal}
+				/>
+				<StatisticItem
+					name="Following"
+					value={following}
+					onClick={openUserFollowingModal}
+				/>
+			</ul>
+			<UserFollowersModal
+				userId={id}
+				isOpen={isUserFollowersOpen}
+				onClose={closeUserFollowersModal}
 			/>
-			<UserListModalStatisticItem
-				name="Following"
-				value={following}
-				users={userFollowing}
-				isLoading={isFollowingLoading}
+			<UserFollowingModal
+				userId={id}
+				isOpen={isUserFollowingOpen}
+				onClose={closeUserFollowingModal}
 			/>
-		</ul>
+		</>
 	);
 };
