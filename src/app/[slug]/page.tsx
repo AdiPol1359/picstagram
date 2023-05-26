@@ -1,5 +1,6 @@
 import { UserHeader } from '@/components/main/UserHeader/UserHeader';
-import { DEFAULT_PROFILE_BIOGRAPHY } from '@/lib/constants';
+import { DEFAULT_PROFILE_BIOGRAPHY, PROJECT_NAME } from '@/lib/constants';
+import { serverEnv } from '@/lib/env/server';
 import { getUserByUsername } from '@/lib/user';
 
 import type { Metadata } from 'next';
@@ -11,14 +12,14 @@ export const generateMetadata = async ({
 
 	return {
 		title: username,
-		themeColor: '#fe85c8',
+		themeColor: '#fe67bA',
 		openGraph: {
 			type: 'profile',
-			siteName: 'Picstagram',
-			url: 'http://localhost:3000/aditv1337-0ed4a5',
-			title: `${username} | Picstagram`,
+			url: `${serverEnv.BASE_URL}/${username}`,
+			siteName: PROJECT_NAME,
 			description: biography || DEFAULT_PROFILE_BIOGRAPHY,
-			...(image && { images: image }),
+			...(username && { title: username }),
+			...(image && { images: { url: image, width: 144, height: 144 } }),
 		},
 	};
 };
