@@ -3,7 +3,7 @@ import { Spinner } from '../ui/Spinner/Spinner';
 import type { ReactNode } from 'react';
 
 type LoadingContentProps = Readonly<{
-	isLoading?: boolean;
+	isLoading: boolean;
 	children: ReactNode;
 }>;
 
