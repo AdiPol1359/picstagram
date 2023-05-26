@@ -11,13 +11,15 @@ type UserItemProps = Readonly<{
 }>;
 
 export const UserItem = ({ user }: UserItemProps) => (
-	<li className="flex py-4">
+	<li className="flex gap-x-0.5 py-4">
 		<Link
 			href={`/${user.username}`}
-			className="flex flex-1 items-center gap-x-2.5"
+			className="flex flex-1 items-center gap-x-2.5 overflow-hidden"
 		>
 			<UserAvatar user={user} size="sm" />
-			<h3 className="font-medium">{user.username}</h3>
+			<h3 className="overflow-hidden text-ellipsis whitespace-nowrap font-medium">
+				{user.username}
+			</h3>
 		</Link>
 		<FollowButton user={user} />
 	</li>

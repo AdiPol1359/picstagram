@@ -5,7 +5,10 @@ import { getBaseUrl, trpc } from '@/lib/utils/trpc';
 
 import type { ReactNode } from 'react';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+	defaultOptions: { queries: { refetchOnWindowFocus: false } },
+});
+
 const trpcClient = trpc.createClient({
 	links: [
 		httpBatchLink({

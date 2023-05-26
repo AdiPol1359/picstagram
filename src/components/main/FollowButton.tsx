@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 
 import { Button } from '../ui/Button/Button';
@@ -14,6 +15,7 @@ type FollowButtonProps = Readonly<{
 }>;
 
 export const FollowButton = ({ user: { id, follow } }: FollowButtonProps) => {
+	const router = useRouter();
 	const requiredSession = useRequiredSession();
 
 	const { data } = useSession();
@@ -21,15 +23,17 @@ export const FollowButton = ({ user: { id, follow } }: FollowButtonProps) => {
 		Boolean(follow)
 	);
 
+	const handleButtonClick = async () => {
+		await toggleFollow({ userId: id });
+		router.refresh();
+	};
+
 	if (data?.user.id === id) {
 		return null;
 	}
 
 	return (
-		<Button
-			disabled={isLoading}
-			onClick={requiredSession(() => toggleFollow({ userId: id }))}
-		>
+		<Button disabled={isLoading} onClick={requiredSession(handleButtonClick)}>
 			{isFollowing ? 'Unfollow' : 'Follow'}
 		</Button>
 	);

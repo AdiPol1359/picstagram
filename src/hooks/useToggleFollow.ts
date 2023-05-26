@@ -1,10 +1,8 @@
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { trpc } from '@/lib/utils/trpc';
 
 export const useToggleFollow = (initialState: boolean) => {
-	const router = useRouter();
 	const [isFollowing, setIsFollowing] = useState(initialState);
 
 	const createFollowMutation = trpc.follows.createFollow.useMutation();
@@ -20,7 +18,6 @@ export const useToggleFollow = (initialState: boolean) => {
 			await createFollowMutation.mutateAsync({ userId });
 		}
 
-		router.refresh();
 		setIsFollowing((prev) => !prev);
 	};
 
