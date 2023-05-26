@@ -1,4 +1,5 @@
 import { UserHeader } from '@/components/main/UserHeader/UserHeader';
+import { DEFAULT_PROFILE_BIOGRAPHY } from '@/lib/constants';
 import { getUserByUsername } from '@/lib/user';
 
 import type { Metadata } from 'next';
@@ -6,15 +7,18 @@ import type { Metadata } from 'next';
 export const generateMetadata = async ({
 	params: { slug },
 }: UserPageProps): Promise<Metadata> => {
-	const { username } = await getUserByUsername(slug);
+	const { username, biography, image } = await getUserByUsername(slug);
 
 	return {
 		title: username,
+		themeColor: '#fe85c8',
 		openGraph: {
-			type: 'article',
-			title: 'siema',
-			description: 'testowy opis',
+			type: 'profile',
+			siteName: 'Picstagram',
 			url: 'http://localhost:3000/aditv1337-0ed4a5',
+			title: `${username} | Picstagram`,
+			description: biography || DEFAULT_PROFILE_BIOGRAPHY,
+			...(image && { images: image }),
 		},
 	};
 };
