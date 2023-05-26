@@ -10,6 +10,12 @@ export const generateMetadata = async ({
 
 	return {
 		title: username,
+		openGraph: {
+			type: 'article',
+			title: 'siema',
+			description: 'testowy opis',
+			url: 'http://localhost:3000/aditv1337-0ed4a5',
+		},
 	};
 };
 
