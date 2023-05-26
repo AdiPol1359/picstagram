@@ -4,6 +4,6 @@
 
 @layer utilities {
 	.app-scrollbar {
-		@apply pr-2 scrollbar scrollbar-track-gray-100 scrollbar-thumb-primary-300 scrollbar-track-rounded-md scrollbar-thumb-rounded-md scrollbar-w-1.5;
+		@apply pr-2 scrollbar scrollbar-track-gray-100 scrollbar-thumb-primary-300 scrollbar-track-rounded-md scrollbar-thumb-rounded-md scrollbar-w-1.5 scrollbar-h-1.5;
 	}
 }
