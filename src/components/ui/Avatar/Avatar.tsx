@@ -25,7 +25,7 @@ type AvatarProps = Readonly<
 export const Avatar = ({ size = 'sm', src, alt, children }: AvatarProps) => (
 	<div
 		className={twMerge(
-			'relative overflow-hidden rounded-full',
+			'relative shrink-0 overflow-hidden rounded-full',
 			sizes[size],
 			children &&
 				'flex items-center justify-center bg-primary-400 font-medium text-white'
