@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 const serverEnvSchema = z.object({
+	BASE_URL: z.string().nonempty(),
 	GOOGLE_CLIENT_ID: z.string().nonempty(),
 	GOOGLE_CLIENT_SECRET: z.string().nonempty(),
 	FACEBOOK_CLIENT_ID: z.string().nonempty(),
@@ -10,6 +11,7 @@ const serverEnvSchema = z.object({
 });
 
 export const serverEnv = serverEnvSchema.parse({
+	BASE_URL: process.env.BASE_URL,
 	GOOGLE_CLIENT_ID: process.env.GOOGLE_CLIENT_ID,
 	GOOGLE_CLIENT_SECRET: process.env.GOOGLE_CLIENT_SECRET,
 	FACEBOOK_CLIENT_ID: process.env.FACEBOOK_CLIENT_ID,
