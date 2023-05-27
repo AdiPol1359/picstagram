@@ -8,17 +8,21 @@ import type { Metadata } from 'next';
 export const generateMetadata = async ({
 	params: { slug },
 }: UserPageProps): Promise<Metadata> => {
-	const { username, biography, image } = await getUserByUsername(slug);
+	const { username, name, image, biography } = await getUserByUsername(slug);
+
+	const [firstName, lastName] = name?.split(' ') || [];
 
 	return {
 		title: username,
-		themeColor: '#fe67bA',
 		openGraph: {
 			type: 'profile',
-			url: `${serverEnv.BASE_URL}/${username}`,
+			locale: 'en_US',
 			siteName: PROJECT_NAME,
+			url: `${serverEnv.BASE_URL}/${username}`,
 			description: biography || DEFAULT_PROFILE_BIOGRAPHY,
-			...(username && { title: username }),
+			firstName,
+			lastName,
+			...(username && { username, title: username }),
 			...(image && { images: { url: image, width: 144, height: 144 } }),
 		},
 	};
