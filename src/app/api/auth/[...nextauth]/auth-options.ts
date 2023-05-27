@@ -4,7 +4,7 @@ import DiscordProvider from 'next-auth/providers/discord';
 import FacebookProvider from 'next-auth/providers/facebook';
 import GoogleProvider from 'next-auth/providers/google';
 
-import { serverEnv } from '@/lib/env/server';
+import { env } from '@/lib/env.mjs';
 import { prisma } from '@/lib/prisma';
 import {
 	getUserByCredentials,
@@ -48,16 +48,16 @@ export const authOptions: AuthOptions = {
 	},
 	providers: [
 		GoogleProvider({
-			clientId: serverEnv.GOOGLE_CLIENT_ID,
-			clientSecret: serverEnv.GOOGLE_CLIENT_SECRET,
+			clientId: env.GOOGLE_CLIENT_ID,
+			clientSecret: env.GOOGLE_CLIENT_SECRET,
 		}),
 		FacebookProvider({
-			clientId: serverEnv.FACEBOOK_CLIENT_ID,
-			clientSecret: serverEnv.FACEBOOK_CLIENT_SECRET,
+			clientId: env.FACEBOOK_CLIENT_ID,
+			clientSecret: env.FACEBOOK_CLIENT_SECRET,
 		}),
 		DiscordProvider({
-			clientId: serverEnv.DISCORD_CLIENT_ID,
-			clientSecret: serverEnv.DISCORD_CLIENT_SECRET,
+			clientId: env.DISCORD_CLIENT_ID,
+			clientSecret: env.DISCORD_CLIENT_SECRET,
 		}),
 		CredentialsProvider({
 			credentials: {
