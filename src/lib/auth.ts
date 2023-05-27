@@ -2,16 +2,16 @@ import { signIn, signOut } from 'next-auth/react';
 
 export const signInWithCredentials = async (
 	{
-		email,
+		username,
 		password,
 	}: {
-		email: string;
+		username: string;
 		password: string;
 	},
 	{ onError }: { onError: (error: string) => void }
 ) => {
 	const result = await signIn('credentials', {
-		email,
+		username,
 		password,
 		redirect: false,
 	});

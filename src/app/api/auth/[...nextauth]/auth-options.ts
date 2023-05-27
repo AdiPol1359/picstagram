@@ -61,7 +61,7 @@ export const authOptions: AuthOptions = {
 		}),
 		CredentialsProvider({
 			credentials: {
-				email: {},
+				username: {},
 				password: {},
 			},
 			authorize: (credentials) => {
