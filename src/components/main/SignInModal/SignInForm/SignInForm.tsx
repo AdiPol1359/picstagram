@@ -26,12 +26,12 @@ export const SignInForm = () => {
 			onSubmit={handleFormSubmit}
 		>
 			<TextField
-				type="email"
-				label="Email address"
-				placeholder="Your email"
+				type="text"
+				label="Username"
+				placeholder="Your username"
 				required={true}
-				error={errors.email?.message}
-				{...register('email')}
+				error={errors.username?.message}
+				{...register('username')}
 			/>
 			<PasswordField
 				label="Password"

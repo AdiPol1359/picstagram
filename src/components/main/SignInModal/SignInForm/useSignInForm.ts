@@ -24,16 +24,18 @@ export const useSignInForm = ({
 		resolver: zodResolver(signInFormSchema),
 	});
 
-	const handleFormSubmit = handleSubmit(async ({ email, password }) => {
+	const handleFormSubmit = handleSubmit(async ({ username, password }) => {
 		onSubmit();
 
 		await signInWithCredentials(
-			{ email, password },
+			{ username, password },
 			{
 				onError: (error) => {
 					switch (error) {
 						case 'CredentialsSignin':
-							setError('email', { message: 'Incorrect email or password' });
+							setError('username', {
+								message: 'Incorrect username or password',
+							});
 							break;
 						default:
 							onUnknownError();
