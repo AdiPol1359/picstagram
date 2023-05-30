@@ -2,8 +2,8 @@ import { forwardRef, useId } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import { ErrorMessage } from '../ErrorMessage/ErrorMessage';
+import { FieldLabel } from '../FieldLabel';
 import { TextFieldIcon } from './TextFieldIcon';
-import { TextFieldLabel } from './TextFieldLabel';
 
 import type { ChangeEventHandler, FocusEventHandler, ReactNode } from 'react';
 
@@ -42,9 +42,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
 		return (
 			<div className="w-full space-y-1">
-				{label && (
-					<TextFieldLabel htmlFor={id} label={label} required={required} />
-				)}
+				{label && <FieldLabel htmlFor={id} label={label} required={required} />}
 				<div className="relative">
 					<input
 						id={id}
