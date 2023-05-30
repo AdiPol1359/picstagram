@@ -14,13 +14,13 @@ interface Options {
 }
 
 export const useCreateUser = () => {
-	const createUserMutation = trpc.users.create.useMutation();
+	const { mutate, isLoading } = trpc.users.create.useMutation();
 
 	const createUser = (
 		{ username, name, email, password }: UserPayload,
 		{ onSuccess, onAlreadyExistsError, onUnknownError }: Options = {}
 	) => {
-		createUserMutation.mutate(
+		mutate(
 			{ username, name, email, password },
 			{
 				onSuccess,
@@ -39,5 +39,5 @@ export const useCreateUser = () => {
 		);
 	};
 
-	return { createUser, isLoading: createUserMutation.isLoading };
+	return { createUser, isLoading };
 };
