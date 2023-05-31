@@ -27,12 +27,18 @@ export const updateUser = (
 	{
 		username,
 		name,
+		email,
 		biography,
-	}: { username?: string; name?: string; biography?: string | null }
+	}: {
+		username?: string;
+		name?: string;
+		email?: string;
+		biography?: string | null;
+	}
 ) =>
 	prisma.user.update({
 		where: { id },
-		data: { username, name, biography },
+		data: { username, name, email, biography },
 		select: createUserSelect(),
 	});
 

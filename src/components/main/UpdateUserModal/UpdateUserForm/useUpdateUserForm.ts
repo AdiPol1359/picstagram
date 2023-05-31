@@ -13,7 +13,7 @@ interface Options {
 }
 
 export const useUpdateUserForm = (
-	{ username, name, biography }: User,
+	{ username, name, email, biography }: User,
 	{ onSuccess }: Options = {}
 ) => {
 	const router = useRouter();
@@ -25,30 +25,33 @@ export const useUpdateUserForm = (
 			defaultValues: {
 				biography,
 				...(name && { name }),
+				...(email && { email }),
 				...(username && { username }),
 			},
 		}
 	);
 
-	const handleFormSubmit = handleSubmit(({ username, name, biography }) => {
-		updateUser(
-			{ username, name, biography },
-			{
-				onSuccess: ({ username }) => {
-					router.replace(`/${username}`);
-					router.refresh();
-					onSuccess?.();
-				},
-				onAlreadyExistsError: (target) => {
-					if (target && isObjectKey(target, getValues())) {
-						setError(target, {
-							message: `${capitalize(target)} already exists`,
-						});
-					}
-				},
-			}
-		);
-	});
+	const handleFormSubmit = handleSubmit(
+		({ username, name, email, biography }) => {
+			updateUser(
+				{ username, name, email, biography },
+				{
+					onSuccess: ({ username }) => {
+						router.replace(`/${username}`);
+						router.refresh();
+						onSuccess?.();
+					},
+					onAlreadyExistsError: (target) => {
+						if (target && isObjectKey(target, getValues())) {
+							setError(target, {
+								message: `${capitalize(target)} already exists`,
+							});
+						}
+					},
+				}
+			);
+		}
+	);
 
 	return { handleFormSubmit, isLoading, ...rest };
 };

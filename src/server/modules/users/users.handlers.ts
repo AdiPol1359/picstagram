@@ -38,11 +38,11 @@ export const createUserHandler = async ({
 
 export const updateUserHandler = async (
 	{ session }: ProtectedContext,
-	{ username, name, biography }: UpdateUserInput
+	{ username, name, email, biography }: UpdateUserInput
 ) => {
 	try {
 		return mapPrismaUserToUser(
-			await updateUser(session.user.id, { username, name, biography })
+			await updateUser(session.user.id, { username, name, email, biography })
 		);
 	} catch (err) {
 		if (isPrismaError(err, prismaErrors.UniqueKeyViolation)) {
@@ -70,5 +70,5 @@ export const getUserByUsernameHandler = async (
 		});
 	}
 
-	return mapPrismaUserToUser(user);
+	return mapPrismaUserToUser(user, { self: session?.user.id === user.id });
 };

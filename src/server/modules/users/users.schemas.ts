@@ -14,6 +14,7 @@ export const userSchema = z.object({
 	id: z.string(),
 	username: z.string().nullable(),
 	name: z.string().nullable(),
+	email: z.string().nullable().optional(),
 	image: z.string().nullable(),
 	biography: z.string().nullable(),
 	follow: z.boolean().optional(),
