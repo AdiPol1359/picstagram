@@ -6,6 +6,7 @@ import GoogleProvider from 'next-auth/providers/google';
 
 import { env } from '@/lib/env.mjs';
 import { prisma } from '@/lib/prisma';
+import { userSchema } from '@/server/modules/users/users.schemas';
 import {
 	getUserByCredentials,
 	initCreatedUser,
@@ -28,7 +29,16 @@ export const authOptions: AuthOptions = {
 
 			return session;
 		},
-		jwt({ token, user }) {
+		jwt({ token, trigger, user, session }) {
+			if (trigger === 'update') {
+				const result = userSchema.safeParse(session);
+
+				if (result.success) {
+					token.name = result.data.name;
+					token.username = result.data.username;
+				}
+			}
+
 			if (user) {
 				token.id = user.id;
 				token.username = user.username;
