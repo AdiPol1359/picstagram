@@ -31,10 +31,18 @@ export const createUserSchema = z.object({
 	password: z.string().min(PASSWORD_MIN_LENGTH).max(PASSWORD_MAX_LENGTH),
 });
 
+export const updateUserSchema = z
+	.object({
+		biography: z.string().trim().nullable(),
+	})
+	.merge(createUserSchema)
+	.partial();
+
 export const getUserByUsernameSchema = z.object({
 	username: z.string(),
 });
 
 export type User = TypeOf<typeof userSchema>;
 export type CreateUserInput = TypeOf<typeof createUserSchema>;
+export type UpdateUserInput = TypeOf<typeof updateUserSchema>;
 export type GetUserByUsernameInput = TypeOf<typeof getUserByUsernameSchema>;

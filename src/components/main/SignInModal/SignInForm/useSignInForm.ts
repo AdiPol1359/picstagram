@@ -1,11 +1,7 @@
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
-
 import { signInFormSchema } from './SignInForm.schemas';
 
+import { useZodForm } from '@/hooks/useZodForm';
 import { signInWithCredentials } from '@/lib/auth';
-
-import type { TypeOf } from 'zod';
 
 interface Options {
 	readonly onSubmit: () => void;
@@ -18,11 +14,7 @@ export const useSignInForm = ({
 	onSignIn,
 	onUnknownError,
 }: Options) => {
-	const { handleSubmit, setError, ...rest } = useForm<
-		TypeOf<typeof signInFormSchema>
-	>({
-		resolver: zodResolver(signInFormSchema),
-	});
+	const { handleSubmit, setError, ...rest } = useZodForm(signInFormSchema);
 
 	const handleFormSubmit = handleSubmit(async ({ username, password }) => {
 		onSubmit();

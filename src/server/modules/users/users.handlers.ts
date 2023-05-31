@@ -1,13 +1,17 @@
 import { TRPCError } from '@trpc/server';
 
 import { mapPrismaUserToUser } from './users.mapper';
-import { createUser, getUserByUsername } from './users.service';
+import { createUser, getUserByUsername, updateUser } from './users.service';
 
 import { isPrismaError, prismaErrors } from '@/lib/utils/prisma-errors';
 
-import type { CreateUserInput, GetUserByUsernameInput } from './users.schemas';
+import type {
+	CreateUserInput,
+	GetUserByUsernameInput,
+	UpdateUserInput,
+} from './users.schemas';
 
-import type { Context } from '@/server/context';
+import type { Context, ProtectedContext } from '@/server/context';
 
 export const createUserHandler = async ({
 	username,
@@ -18,6 +22,27 @@ export const createUserHandler = async ({
 	try {
 		return mapPrismaUserToUser(
 			await createUser({ username, name, email, password })
+		);
+	} catch (err) {
+		if (isPrismaError(err, prismaErrors.UniqueKeyViolation)) {
+			throw new TRPCError({
+				code: 'CONFLICT',
+				message: 'User already exists!',
+				cause: err,
+			});
+		}
+
+		throw err;
+	}
+};
+
+export const updateUserHandler = async (
+	{ session }: ProtectedContext,
+	{ username, name, biography }: UpdateUserInput
+) => {
+	try {
+		return mapPrismaUserToUser(
+			await updateUser(session.user.id, { username, name, biography })
 		);
 	} catch (err) {
 		if (isPrismaError(err, prismaErrors.UniqueKeyViolation)) {

@@ -4,6 +4,7 @@ import {
 	EMAIL_ERROR_MESSAGE,
 	EMAIL_MAX_LENGTH,
 	EMAIL_MAX_LENGTH_ERROR_MESSAGE,
+	NAME_ERROR_MESSAGE,
 	NAME_REGEX,
 	PASSWORD_MAX_LENGTH,
 	PASSWORD_MIN_LENGTH,
@@ -19,7 +20,7 @@ const PASSWORD_MAX_LENGTH_ERROR_MESSAGE =
 export const signUpFormSchema = z
 	.object({
 		username: z.string().regex(USERNAME_REGEX, USERNAME_ERROR_MESSAGE),
-		name: z.string().regex(NAME_REGEX, 'Please enter a valid name'),
+		name: z.string().regex(NAME_REGEX, NAME_ERROR_MESSAGE),
 		email: z
 			.string()
 			.email(EMAIL_ERROR_MESSAGE)

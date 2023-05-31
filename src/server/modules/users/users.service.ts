@@ -22,6 +22,20 @@ export const createUser = async ({
 		select: createUserSelect(),
 	});
 
+export const updateUser = (
+	id: string,
+	{
+		username,
+		name,
+		biography,
+	}: { username?: string; name?: string; biography?: string | null }
+) =>
+	prisma.user.update({
+		where: { id },
+		data: { username, name, biography },
+		select: createUserSelect(),
+	});
+
 export const getUserByCredentials = async ({
 	username,
 	password,
