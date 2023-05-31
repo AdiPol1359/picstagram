@@ -5,9 +5,9 @@ import { isTRPCClientError, trpc } from '@/lib/utils/trpc';
 import type { User } from '@/server/modules/users/users.schemas';
 
 interface UserPayload {
-	username?: string;
-	name?: string;
-	biography?: string | null;
+	readonly username?: string;
+	readonly name?: string;
+	readonly biography?: string | null;
 }
 
 interface Options {
