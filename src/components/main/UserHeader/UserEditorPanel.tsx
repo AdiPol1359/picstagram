@@ -28,7 +28,10 @@ export const UserEditorPanel = ({ user, children }: UserEditorPanelProps) => {
 		<>
 			<div onClick={openModal} className="group relative h-fit w-fit">
 				{children}
-				<button className="absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-black/60 text-3xl text-white opacity-0 transition-opacity group-hover:opacity-100">
+				<button
+					type="button"
+					className="absolute left-0 top-0 z-10 flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-black/60 text-3xl text-white opacity-0 transition-opacity group-hover:opacity-100"
+				>
 					<AiOutlineEdit />
 				</button>
 			</div>
