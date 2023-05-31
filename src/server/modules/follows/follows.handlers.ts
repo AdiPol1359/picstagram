@@ -21,7 +21,7 @@ export const getFollowersHandler = async (
 	);
 	const followers = follows.map(({ follower }) => follower).filter(Boolean);
 
-	return followers.map(mapPrismaUserToUser);
+	return followers.map((user) => mapPrismaUserToUser(user));
 };
 
 export const getFollowingHandler = async (
@@ -36,7 +36,7 @@ export const getFollowingHandler = async (
 	);
 	const following = follows.map(({ following }) => following).filter(Boolean);
 
-	return following.map(mapPrismaUserToUser);
+	return following.map((user) => mapPrismaUserToUser(user));
 };
 
 export const createFollowHandler = async (
