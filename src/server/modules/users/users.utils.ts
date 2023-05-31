@@ -8,6 +8,7 @@ export const createUserSelect = ({
 	({
 		id: true,
 		name: true,
+		email: true,
 		username: true,
 		password: true,
 		image: true,

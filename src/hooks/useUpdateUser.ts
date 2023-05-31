@@ -7,6 +7,7 @@ import type { User } from '@/server/modules/users/users.schemas';
 interface UserPayload {
 	readonly username?: string;
 	readonly name?: string;
+	readonly email?: string;
 	readonly biography?: string | null;
 }
 
@@ -20,11 +21,11 @@ export const useUpdateUser = () => {
 	const { mutate, isLoading } = trpc.users.update.useMutation();
 
 	const updateUser = (
-		{ username, name, biography }: UserPayload,
+		{ username, name, email, biography }: UserPayload,
 		{ onSuccess, onAlreadyExistsError }: Options = {}
 	) => {
 		mutate(
-			{ username, name, biography },
+			{ username, name, email, biography },
 			{
 				onSuccess: async (user) => {
 					await update(user);

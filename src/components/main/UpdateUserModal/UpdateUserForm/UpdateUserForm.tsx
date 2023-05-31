@@ -37,6 +37,14 @@ export const UpdateUserForm = ({ user, onSuccess }: UpdateUserFormProps) => {
 				error={errors.name?.message}
 				{...register('name')}
 			/>
+			<TextField
+				type="email"
+				label="Email address"
+				placeholder="Your email"
+				required={true}
+				error={errors.email?.message}
+				{...register('email')}
+			/>
 			<Textarea
 				label="Biography"
 				placeholder="Your biography"
