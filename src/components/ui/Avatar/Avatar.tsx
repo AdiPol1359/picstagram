@@ -31,7 +31,7 @@ export const Avatar = ({ size = 'sm', src, alt, children }: AvatarProps) => (
 				'flex items-center justify-center bg-primary-400 font-medium text-white'
 		)}
 	>
-		{src && <Image src={src} alt={alt} fill />}
+		{src && <Image className="object-cover" src={src} alt={alt} fill />}
 		{children}
 	</div>
 );
