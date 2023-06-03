@@ -11,7 +11,7 @@ const variants = {
 } as const;
 
 type ButtonProps = Readonly<{
-	type?: 'button' | 'submit';
+	type?: 'button' | 'submit' | 'reset';
 	disabled?: boolean;
 	onClick?: () => void;
 	fill?: boolean;
