@@ -34,6 +34,7 @@ export const createUserSchema = z.object({
 
 export const updateUserSchema = z
 	.object({
+		image: z.string().trim().nullable(),
 		biography: z.string().trim().nullable(),
 	})
 	.merge(createUserSchema)

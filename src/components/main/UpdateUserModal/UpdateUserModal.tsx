@@ -1,3 +1,4 @@
+import { UpdateUserAvatarForm } from './UpdateUserAvatarForm/UpdateUserAvatarForm';
 import { UpdateUserForm } from './UpdateUserForm/UpdateUserForm';
 
 import { Modal } from '@/components/ui/Modal/Modal';
@@ -14,6 +15,7 @@ type UpdateUserModalProps = Readonly<{
 export const UpdateUserModal = ({ user, ...props }: UpdateUserModalProps) => (
 	<Modal {...props}>
 		<Modal.Title>Update your account</Modal.Title>
+		<UpdateUserAvatarForm user={user} onSuccess={props.onClose} />
 		<UpdateUserForm user={user} onSuccess={props.onClose} />
 	</Modal>
 );

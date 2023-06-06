@@ -8,6 +8,7 @@ interface UserPayload {
 	readonly username?: string;
 	readonly name?: string;
 	readonly email?: string;
+	readonly image?: string | null;
 	readonly biography?: string | null;
 }
 
@@ -21,11 +22,11 @@ export const useUpdateUser = () => {
 	const { mutate, isLoading } = trpc.users.update.useMutation();
 
 	const updateUser = (
-		{ username, name, email, biography }: UserPayload,
+		{ username, name, email, image, biography }: UserPayload,
 		{ onSuccess, onAlreadyExistsError }: Options = {}
 	) => {
 		mutate(
-			{ username, name, email, biography },
+			{ username, name, email, image, biography },
 			{
 				onSuccess: async (user) => {
 					await update(user);
