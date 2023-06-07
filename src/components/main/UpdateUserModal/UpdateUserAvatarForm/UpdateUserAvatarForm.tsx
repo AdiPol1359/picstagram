@@ -20,7 +20,12 @@ export const UpdateUserAvatarForm = ({
 }: UpdateUserAvatarFormProps) => {
 	const [image, setImage] = useState(userImage);
 
-	const { isLoading, handleFormSubmit, register } = useUpdateUserAvatarForm({
+	const {
+		isLoading,
+		handleFormSubmit,
+		formState: { isSubmitSuccessful },
+		register,
+	} = useUpdateUserAvatarForm({
 		onSuccess,
 	});
 
@@ -57,7 +62,7 @@ export const UpdateUserAvatarForm = ({
 				<LoadingButton
 					type="submit"
 					variant="primary"
-					disabled={image === userImage}
+					disabled={image === userImage || isSubmitSuccessful}
 					isLoading={isLoading}
 					fill
 				>
