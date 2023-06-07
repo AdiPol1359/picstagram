@@ -1,4 +1,8 @@
 import { forwardRef, useId } from 'react';
+import { AiOutlineCloudUpload } from 'react-icons/ai';
+import { twMerge } from 'tailwind-merge';
+
+import { BUTTON_BASE_STYLES, BUTTON_VARIANTS } from '../Button/Button.styles';
 
 import type {
 	ChangeEvent,
@@ -13,11 +17,27 @@ type FileButtonProps = Readonly<{
 	onChange?: ChangeEventHandler<HTMLInputElement>;
 	onBlur?: FocusEventHandler<HTMLInputElement>;
 	onFiles?: (files: FileList) => void;
+	fill?: boolean;
+	icon?: boolean;
+	variant?: keyof typeof BUTTON_VARIANTS;
 	children: ReactNode;
 }>;
 
 export const FileButton = forwardRef<HTMLInputElement, FileButtonProps>(
-	({ name, accept, onChange, onBlur, onFiles, children }, ref) => {
+	(
+		{
+			name,
+			accept,
+			onChange,
+			onBlur,
+			onFiles,
+			fill,
+			icon,
+			variant = 'default',
+			children,
+		},
+		ref
+	) => {
 		const id = useId();
 
 		const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -34,16 +54,22 @@ export const FileButton = forwardRef<HTMLInputElement, FileButtonProps>(
 			<>
 				<label
 					htmlFor={id}
-					className="duration-250 flex w-full cursor-pointer select-none items-center justify-center gap-x-1.5 rounded-lg border bg-white px-5 py-2.5 font-medium text-black shadow-sm transition disabled:opacity-75"
+					className={twMerge(
+						BUTTON_BASE_STYLES,
+						'cursor-pointer select-none',
+						fill ? 'w-full' : 'w-fit',
+						BUTTON_VARIANTS[variant]
+					)}
 				>
+					{icon && <AiOutlineCloudUpload />}
 					{children}
 				</label>
 				<input
 					type="file"
-					id={id}
-					accept={accept}
-					name={name}
 					ref={ref}
+					id={id}
+					name={name}
+					accept={accept}
 					onChange={handleInputChange}
 					onBlur={onBlur}
 					hidden

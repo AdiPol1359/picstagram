@@ -39,6 +39,8 @@ export const UpdateUserAvatarForm = ({
 					<FileButton
 						accept="image/png,image/jpeg"
 						onFiles={handleFilesChange}
+						icon={true}
+						fill={true}
 						{...register('file')}
 					>
 						Upload new avatar
