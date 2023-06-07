@@ -18,6 +18,13 @@ const api = makeApi([
 		],
 		response: z.object({
 			secure_url: z.string(),
+			eager: z
+				.array(
+					z.object({
+						secure_url: z.string(),
+					})
+				)
+				.optional(),
 		}),
 	},
 	{
@@ -47,7 +54,10 @@ const client = new Zodios(
 	api
 );
 
-export const createImage = (file: Blob, publicId: string) => {
+export const createImage = (
+	file: Blob,
+	{ publicId, eager }: { publicId: string; eager?: string[] }
+) => {
 	const timestamp = Date.now().toString();
 	const formData = new FormData();
 
@@ -61,8 +71,11 @@ export const createImage = (file: Blob, publicId: string) => {
 			publicId,
 			timestamp,
 			secret: env.CLOUDINARY_API_SECRET,
+			eager: eager?.join(','),
 		})
 	);
+
+	eager && formData.append('eager', eager.join(','));
 
 	return client.createImage(formData);
 };

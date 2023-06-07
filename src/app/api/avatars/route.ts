@@ -36,9 +36,14 @@ export const POST = async (request: Request) => {
 		return createJsonResponse({ message: 'Username not found!' }, 404);
 	}
 
-	const { secure_url } = await createImage(image, username);
+	const { secure_url, eager } = await createImage(image, {
+		publicId: username,
+		eager: ['c_fill', 'h_150', 'w_150'],
+	});
 
-	return NextResponse.json({ url: secure_url });
+	const url = eager?.[0] ? eager[0].secure_url : secure_url;
+
+	return NextResponse.json({ url });
 };
 
 export const DELETE = async () => {
