@@ -43,9 +43,9 @@ export const UpdateUserAvatarForm = ({
 				<div className="grid gap-2 sm:grid-cols-2">
 					<FileButton
 						accept="image/png,image/jpeg"
-						onFiles={handleFilesChange}
 						icon={true}
 						fill={true}
+						onFiles={handleFilesChange}
 						{...register('file')}
 					>
 						Upload new avatar
