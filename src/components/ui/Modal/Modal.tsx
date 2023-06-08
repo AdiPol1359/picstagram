@@ -36,7 +36,7 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => (
 							leaveFrom="opacity-100 translate-y-0"
 							leaveTo="opacity-0 translate-y-8"
 						>
-							<Dialog.Panel className="relative w-full max-w-xl rounded-2xl bg-white p-6 shadow-sm">
+							<Dialog.Panel className="relative w-full max-w-xl rounded-2xl bg-white p-3 shadow-sm sm:p-6">
 								<div className="absolute right-2.5 top-2.5">
 									<IconButton
 										label="Close modal"
