@@ -64,6 +64,7 @@ export const createImage = (
 	formData.append('file', file);
 	formData.append('public_id', publicId);
 	formData.append('timestamp', timestamp);
+	formData.append('folder', env.CLOUDINARY_ASSETS_FOLDER);
 	formData.append('api_key', env.CLOUDINARY_API_KEY);
 	formData.append(
 		'signature',
@@ -71,6 +72,7 @@ export const createImage = (
 			publicId,
 			timestamp,
 			secret: env.CLOUDINARY_API_SECRET,
+			folder: env.CLOUDINARY_ASSETS_FOLDER,
 			eager: eager?.join(','),
 		})
 	);
@@ -80,8 +82,9 @@ export const createImage = (
 	return client.createImage(formData);
 };
 
-export const deleteImage = (publicId: string) => {
+export const deleteImage = (id: string) => {
 	const timestamp = Date.now().toString();
+	const publicId = `${env.CLOUDINARY_ASSETS_FOLDER}/${id}`;
 
 	return client.deleteImage({
 		timestamp,
