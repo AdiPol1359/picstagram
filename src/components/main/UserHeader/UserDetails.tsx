@@ -11,7 +11,7 @@ export const UserDetails = ({
 }: UserDetailsProps) => (
 	<div>
 		<h3 className="font-medium">{name}</h3>
-		<div className="mt-0.5 whitespace-pre-line text-justify">
+		<div className="mt-0.5 whitespace-pre-line break-all text-justify">
 			{biography || DEFAULT_PROFILE_BIOGRAPHY}
 		</div>
 	</div>
