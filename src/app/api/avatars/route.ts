@@ -30,14 +30,8 @@ export const POST = async (request: Request) => {
 		return createJsonResponse({ message: 'Invalid image!' }, 400);
 	}
 
-	const { username } = session.user;
-
-	if (!username) {
-		return createJsonResponse({ message: 'Username not found!' }, 404);
-	}
-
 	const { secure_url, eager } = await createImage(image, {
-		publicId: username,
+		publicId: session.user.id,
 		eager: ['c_fill', 'h_150', 'w_150'],
 	});
 
@@ -53,13 +47,7 @@ export const DELETE = async () => {
 		return createJsonResponse({ message: 'Unauthorized!' }, 401);
 	}
 
-	const { username } = session.user;
-
-	if (!username) {
-		return createJsonResponse({ message: 'Username not found!' }, 404);
-	}
-
-	await deleteImage(username);
+	await deleteImage(session.user.id);
 
 	return createJsonResponse(undefined, 204);
 };
