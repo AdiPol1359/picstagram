@@ -25,7 +25,7 @@ export const Modal = ({ isOpen, onClose, children }: ModalProps) => (
 				leaveFrom="opacity-100"
 				leaveTo="opacity-0"
 			>
-				<div className="fixed inset-0 overflow-y-auto bg-black/50">
+				<div className="fixed inset-0 z-50 overflow-y-auto bg-black/50">
 					<div className="flex min-h-full items-center justify-center p-2">
 						<Transition.Child
 							as={Fragment}

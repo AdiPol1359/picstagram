@@ -17,7 +17,7 @@ export const DropdownItems = ({ children }: DropdownItemsProps) => (
 		leaveFrom="opacity-100 scale-100"
 		leaveTo="opacity-0 scale-95"
 	>
-		<Menu.Items className="absolute right-0 top-full rounded-lg border bg-white p-1 shadow-sm">
+		<Menu.Items className="absolute right-0 top-full z-50 rounded-lg border bg-white p-1 shadow-sm">
 			{children}
 		</Menu.Items>
 	</Transition>
