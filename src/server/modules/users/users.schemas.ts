@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 import {
+	BIOGRAPHY_REGEX,
 	EMAIL_MAX_LENGTH,
 	NAME_REGEX,
 	PASSWORD_MAX_LENGTH,
@@ -35,7 +36,7 @@ export const createUserSchema = z.object({
 export const updateUserSchema = z
 	.object({
 		image: z.string().trim().nullable(),
-		biography: z.string().trim().nullable(),
+		biography: z.string().regex(BIOGRAPHY_REGEX).trim().nullable(),
 	})
 	.merge(createUserSchema)
 	.partial();

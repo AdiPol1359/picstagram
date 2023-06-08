@@ -16,3 +16,5 @@ export const PASSWORD_MAX_LENGTH = 30;
 export const USERNAME_REGEX = /^[a-z0-9_.-]{1,20}$/;
 export const NAME_REGEX =
 	/^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]{0,29}(?: [A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]{0,29})?$/;
+export const BIOGRAPHY_REGEX =
+	/^(?:[^\n]|n){0,40}(?:\n(?:[^\n]|n){0,40}){0,2}$/;
