@@ -11,29 +11,38 @@ import type {
 	ReactNode,
 } from 'react';
 
-type FileButtonProps = Readonly<{
-	name?: string;
-	accept?: string;
-	onChange?: ChangeEventHandler<HTMLInputElement>;
-	onBlur?: FocusEventHandler<HTMLInputElement>;
-	onFiles?: (files: FileList) => void;
-	fill?: boolean;
-	icon?: boolean;
-	variant?: keyof typeof BUTTON_VARIANTS;
-	children: ReactNode;
-}>;
+type FileButtonProps = Readonly<
+	| {
+			name?: string;
+			accept?: string;
+			multiple?: boolean;
+			fill?: boolean;
+			icon?: boolean;
+			variant?: keyof typeof BUTTON_VARIANTS;
+			onChange?: ChangeEventHandler<HTMLInputElement>;
+			onBlur?: FocusEventHandler<HTMLInputElement>;
+			onFiles?: (files: FileList) => void;
+			children: ReactNode;
+	  } & (
+			| { limit?: undefined; onLimitError?: undefined }
+			| { limit: number; onLimitError?: () => void }
+	  )
+>;
 
 export const FileButton = forwardRef<HTMLInputElement, FileButtonProps>(
 	(
 		{
 			name,
 			accept,
-			onChange,
-			onBlur,
-			onFiles,
+			limit,
+			multiple,
 			fill,
 			icon,
 			variant = 'default',
+			onChange,
+			onBlur,
+			onFiles,
+			onLimitError,
 			children,
 		},
 		ref
@@ -43,7 +52,12 @@ export const FileButton = forwardRef<HTMLInputElement, FileButtonProps>(
 		const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
 			const { files } = event.target;
 
-			if (files) {
+			if (!files) return;
+
+			if (limit && files.length > limit) {
+				onLimitError?.();
+				event.preventDefault();
+			} else {
 				onFiles?.(files);
 			}
 
@@ -70,6 +84,7 @@ export const FileButton = forwardRef<HTMLInputElement, FileButtonProps>(
 					id={id}
 					name={name}
 					accept={accept}
+					multiple={multiple}
 					onChange={handleInputChange}
 					onBlur={onBlur}
 					hidden

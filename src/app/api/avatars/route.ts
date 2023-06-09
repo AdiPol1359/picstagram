@@ -1,27 +1,12 @@
 import { NextResponse } from 'next/server';
-import { getServerSession } from 'next-auth';
-
-import { authOptions } from '../auth/[...nextauth]/auth-options';
 
 import { createImage, deleteImage } from '@/lib/services/cloudinary.service';
-
-const createJsonResponse = (
-	body: Record<string, unknown> | undefined,
-	status: number
-) =>
-	new Response(JSON.stringify(body), {
-		status,
-		headers: {
-			'Content-Type': 'application/json',
-		},
-	});
+import { createJsonResponse, protectRoute } from '@/lib/utils/route';
 
 export const POST = async (request: Request) => {
-	const session = await getServerSession(authOptions);
+	const [err, session] = await protectRoute();
 
-	if (!session) {
-		return createJsonResponse({ message: 'Unauthorized!' }, 401);
-	}
+	if (err) return err;
 
 	const data = await request.formData();
 	const image = data.get('image');
@@ -41,11 +26,9 @@ export const POST = async (request: Request) => {
 };
 
 export const DELETE = async () => {
-	const session = await getServerSession(authOptions);
+	const [err, session] = await protectRoute();
 
-	if (!session) {
-		return createJsonResponse({ message: 'Unauthorized!' }, 401);
-	}
+	if (err) return err;
 
 	await deleteImage(session.user.id);
 

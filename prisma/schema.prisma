@@ -41,6 +41,7 @@ model User {
   accounts      Account[]
   follower      UsersFollows[] @relation("following")
   following     UsersFollows[] @relation("follower")
+  post          Post[]
 
   @@map("user")
 }
@@ -64,4 +65,25 @@ model UsersFollows {
 
   @@id([followerId, followingId])
   @@map("users_follows")
+}
+
+model Post {
+  id          Int      @id @default(autoincrement())
+  description String
+  userId      String   @map("user_id")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  image       Image[]
+
+  @@map("post")
+}
+
+model Image {
+  id     Int    @id @default(autoincrement())
+  url    String @unique
+  postId Int    @map("post_id")
+  post   Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+
+  @@map("image")
 }

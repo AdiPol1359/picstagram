@@ -6,6 +6,7 @@ import { UserAvatar } from '@/components/common/UserAvatar';
 import { Button } from '@/components/ui/Button/Button';
 import { FileButton } from '@/components/ui/FileButton/FileButton';
 import { LoadingButton } from '@/components/ui/LoadingButton/LoadingButton';
+import { createUrlFromFile } from '@/lib/utils/file';
 
 import type { User } from '@/server/modules/users/users.schemas';
 
@@ -30,7 +31,7 @@ export const UpdateUserAvatarForm = ({
 	});
 
 	const handleFilesChange = (files: FileList) => {
-		setImage(files.length > 0 ? URL.createObjectURL(files[0]) : null);
+		setImage(files.length > 0 ? createUrlFromFile(files[0]) : null);
 	};
 
 	return (
