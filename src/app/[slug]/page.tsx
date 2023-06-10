@@ -40,7 +40,7 @@ export default async function UserPage({ params: { slug } }: UserPageProps) {
 	return (
 		<>
 			<UserHeader user={user} />
-			<CreatePostButton />
+			<CreatePostButton user={user} />
 			<UserPosts user={user} />
 		</>
 	);
