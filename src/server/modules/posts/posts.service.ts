@@ -10,6 +10,13 @@ export const select = {
 	},
 } satisfies Prisma.PostSelect;
 
+export const getAllPostsByUsername = (username: string) =>
+	prisma.post.findMany({
+		where: { user: { username } },
+		orderBy: { createdAt: 'desc' },
+		select,
+	});
+
 export const createPost = ({
 	description,
 	userId,

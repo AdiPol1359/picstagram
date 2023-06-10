@@ -1,5 +1,6 @@
 import { CreatePostButton } from '@/components/main/CreatePostButton';
 import { UserHeader } from '@/components/main/UserHeader/UserHeader';
+import { UserPosts } from '@/components/main/UserPosts/UserPosts';
 import { DEFAULT_PROFILE_BIOGRAPHY, PROJECT_NAME } from '@/lib/constants';
 import { env } from '@/lib/env.mjs';
 import { getUserByUsername } from '@/lib/user';
@@ -40,6 +41,7 @@ export default async function UserPage({ params: { slug } }: UserPageProps) {
 		<>
 			<UserHeader user={user} />
 			<CreatePostButton />
+			<UserPosts user={user} />
 		</>
 	);
 }

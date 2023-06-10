@@ -8,4 +8,9 @@ export const postSchema = z.object({
 	images: z.array(z.string()),
 });
 
+export const getAllPostsSchema = z.object({
+	username: z.string(),
+});
+
 export type Post = TypeOf<typeof postSchema>;
+export type GetAllPostsInput = TypeOf<typeof getAllPostsSchema>;
