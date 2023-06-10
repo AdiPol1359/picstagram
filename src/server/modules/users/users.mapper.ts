@@ -15,7 +15,7 @@ export const mapPrismaUserToUser = (
 		image,
 		biography,
 		follower,
-		_count: { follower: followers, following },
+		_count: { post: posts, follower: followers, following },
 	}: PrismaUser,
 	{ self }: { self?: boolean } = {}
 ): User => ({
@@ -24,7 +24,7 @@ export const mapPrismaUserToUser = (
 	username,
 	image,
 	biography,
-	statistics: { followers, following, photos: 0 },
+	statistics: { posts, followers, following },
 	...(self && { email }),
 	...(!!follower && { follow: follower.length > 0 }),
 });
