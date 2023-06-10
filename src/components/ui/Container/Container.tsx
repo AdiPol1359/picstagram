@@ -3,7 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import type { ReactNode } from 'react';
 
 type ContainerProps = Readonly<{
-	as?: keyof HTMLElementTagNameMap;
+	as?: keyof JSX.IntrinsicElements;
 	className?: string;
 	children: ReactNode;
 }>;
