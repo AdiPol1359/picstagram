@@ -13,7 +13,7 @@ export const createUserSelect = ({
 		password: true,
 		image: true,
 		biography: true,
-		_count: { select: { follower: true, following: true } },
+		_count: { select: { post: true, follower: true, following: true } },
 		...(followerId && { follower: { where: { followerId } } }),
 	} satisfies Prisma.UserSelect);
 

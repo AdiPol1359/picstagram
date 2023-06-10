@@ -20,7 +20,7 @@ export const userSchema = z.object({
 	biography: z.string().nullable(),
 	follow: z.boolean().optional(),
 	statistics: z.object({
-		photos: z.number(),
+		posts: z.number(),
 		followers: z.number(),
 		following: z.number(),
 	}),

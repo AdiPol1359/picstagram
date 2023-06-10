@@ -15,7 +15,7 @@ type UserStatisticsProps = Readonly<{
 export const UserStatistics = ({
 	user: {
 		id,
-		statistics: { photos, followers, following },
+		statistics: { posts, followers, following },
 	},
 }: UserStatisticsProps) => {
 	const {
@@ -33,7 +33,7 @@ export const UserStatistics = ({
 	return (
 		<>
 			<ul className="flex justify-between">
-				<StatisticItem name="Photos" value={photos} />
+				<StatisticItem name="Posts" value={posts} />
 				<StatisticItem
 					name="Followers"
 					value={followers}
