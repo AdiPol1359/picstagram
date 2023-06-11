@@ -1,8 +1,8 @@
 'use client';
 
 import { useSession } from 'next-auth/react';
+import { IoAdd } from 'react-icons/io5';
 
-import { Button } from '../ui/Button/Button';
 import { CreatePostModal } from './CreatePostModal/CreatePostModal';
 
 import { useModal } from '@/hooks/useModal';
@@ -23,7 +23,14 @@ export const CreatePostButton = ({ user }: CreatePostButtonProps) => {
 
 	return (
 		<>
-			<Button onClick={openModal}>Create a new post</Button>
+			<button
+				type="button"
+				onClick={openModal}
+				aria-label="Create a new post"
+				className="fixed bottom-3.5 left-1/2 -translate-x-1/2 rounded-full bg-primary-400 p-2 text-2xl text-white opacity-40 transition-opacity hover:opacity-100"
+			>
+				<IoAdd />
+			</button>
 			<CreatePostModal isOpen={isOpen} onClose={closeModal} />
 		</>
 	);
