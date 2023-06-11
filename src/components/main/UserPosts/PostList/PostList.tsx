@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { EmptyPostsAlert } from './EmptyPostsAlert';
-import { SinglePost } from './SinglePost';
+import { SinglePost } from './SinglePost/SinglePost';
 
 import type { Post } from '@/server/modules/posts/posts.schemas';
 
