@@ -1,8 +1,10 @@
 import { CreatePostButton } from '@/components/main/CreatePostButton';
 import { UserHeader } from '@/components/main/UserHeader/UserHeader';
+import { UserPostModal } from '@/components/main/UserPostModal/UserPostModal';
 import { UserPosts } from '@/components/main/UserPosts/UserPosts';
 import { DEFAULT_PROFILE_BIOGRAPHY, PROJECT_NAME } from '@/lib/constants';
 import { env } from '@/lib/env.mjs';
+import { getPostById, parsePostQuery } from '@/lib/post';
 import { getUserByUsername } from '@/lib/user';
 
 import type { Metadata } from 'next';
@@ -32,15 +34,26 @@ export const generateMetadata = async ({
 
 type UserPageProps = Readonly<{
 	params: { slug: string };
+	searchParams: { post?: string | string[] };
 }>;
 
-export default async function UserPage({ params: { slug } }: UserPageProps) {
+export default async function UserPage({
+	params: { slug },
+	searchParams,
+}: UserPageProps) {
+	const postId = parsePostQuery(searchParams.post);
+
+	// TODO: Promise all
 	const user = await getUserByUsername(slug);
+	const post = postId
+		? await getPostById({ id: postId, username: slug })
+		: null;
 
 	return (
 		<>
 			<UserHeader user={user} />
 			<UserPosts user={user} />
+			<UserPostModal post={post} />
 			<CreatePostButton user={user} />
 		</>
 	);

@@ -16,7 +16,7 @@ export const UserPosts = ({ user: { username } }: UserPostsProps) => {
 
 	return (
 		<LoadingContent isLoading={isLoading}>
-			<PostList posts={posts} />
+			<PostList posts={posts} username={username || ''} />
 		</LoadingContent>
 	);
 };
