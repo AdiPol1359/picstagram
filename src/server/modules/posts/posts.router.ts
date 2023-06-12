@@ -1,7 +1,11 @@
 import { z } from 'zod';
 
-import { getAllPostsHandler } from './posts.handler';
-import { getAllPostsSchema, postSchema } from './posts.schemas';
+import { getAllPostsHandler, getPostByIdHandler } from './posts.handler';
+import {
+	getAllPostsSchema,
+	getPostByIdSchema,
+	postSchema,
+} from './posts.schemas';
 
 import { publicProcedure, router } from '@/server/trpc';
 
@@ -10,4 +14,8 @@ export const postsRouter = router({
 		.input(getAllPostsSchema)
 		.output(z.array(postSchema))
 		.query(({ input }) => getAllPostsHandler(input)),
+	getById: publicProcedure
+		.input(getPostByIdSchema)
+		.output(postSchema)
+		.query(({ input }) => getPostByIdHandler(input)),
 });

@@ -8,6 +8,13 @@ export const select = {
 	image: {
 		select: { id: true, url: true },
 	},
+	user: {
+		select: {
+			id: true,
+			username: true,
+			name: true,
+		},
+	},
 } satisfies Prisma.PostSelect;
 
 export const getAllPostsByUsername = (username: string) =>
@@ -16,6 +23,14 @@ export const getAllPostsByUsername = (username: string) =>
 		orderBy: { createdAt: 'desc' },
 		select,
 	});
+
+export const getPostById = ({
+	id,
+	username,
+}: {
+	id: number;
+	username: string;
+}) => prisma.post.findFirst({ where: { id, user: { username } }, select });
 
 export const createPost = ({
 	description,

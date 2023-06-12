@@ -6,8 +6,14 @@ export const mapPrismaPostToPost = ({
 	id,
 	description,
 	image,
+	user: { id: userId, username, name },
 }: Prisma.PostGetPayload<{ select: typeof select }>): Post => ({
 	id,
 	description,
 	images: image.map(({ url }) => url),
+	author: {
+		id: userId,
+		username,
+		name,
+	},
 });
