@@ -8,7 +8,7 @@ export const parsePostQuery = (query: string | string[] | undefined) => {
 		return null;
 	}
 
-	return Array.isArray(query) ? Number(query[0]) : Number(query);
+	return Number(Array.isArray(query) ? query[0] : query);
 };
 
 export const getPostById = async ({
