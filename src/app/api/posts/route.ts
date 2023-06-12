@@ -13,7 +13,7 @@ const validateImages = (data: unknown): data is File[] =>
 	data.every((item) => item instanceof Blob);
 
 const validateDescription = (data: unknown): data is string =>
-	typeof data === 'string' && data.length <= POST_DESCRIPTION_MAX_LENGTH + 9999;
+	typeof data === 'string' && data.length <= POST_DESCRIPTION_MAX_LENGTH;
 
 export const POST = async (request: Request) => {
 	const [err, session] = await protectRoute();
