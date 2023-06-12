@@ -43,18 +43,17 @@ export default async function UserPage({
 }: UserPageProps) {
 	const postId = parsePostQuery(searchParams.post);
 
-	// TODO: Promise all
-	const user = await getUserByUsername(slug);
-	const post = postId
-		? await getPostById({ id: postId, username: slug })
-		: null;
+	const [user, post] = await Promise.all([
+		getUserByUsername(slug),
+		postId ? getPostById({ id: postId, username: slug }) : null,
+	]);
 
 	return (
 		<>
 			<UserHeader user={user} />
 			<UserPosts user={user} />
-			<UserPostModal post={post} />
 			<CreatePostButton user={user} />
+			<UserPostModal post={post} />
 		</>
 	);
 }
