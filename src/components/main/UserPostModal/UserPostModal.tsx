@@ -16,11 +16,9 @@ type UserPostModalProps = Readonly<{
 }>;
 
 export const UserPostModal = ({ post }: UserPostModalProps) => {
-	const { isOpen, openModal, closeModal } = useModal(Boolean(post));
+	const { isOpen, openModal, closeModal } = useModal(false);
 	const { value, setCache } = useCacheValue<Post>();
 	const { replace } = useRouter();
-
-	const userPost = post || value;
 
 	useEffect(() => {
 		if (post) {
@@ -35,11 +33,11 @@ export const UserPostModal = ({ post }: UserPostModalProps) => {
 		<Modal
 			isOpen={isOpen}
 			onClose={() => {
-				replace(`/${userPost?.author.username}`);
+				replace(`/${value?.author.username}`);
 			}}
 		>
-			<Modal.Title>{userPost?.author.name}</Modal.Title>
-			{userPost && <UserPostDetails post={userPost} />}
+			<Modal.Title>{value?.author.name}</Modal.Title>
+			{value && <UserPostDetails post={value} />}
 		</Modal>
 	);
 };
