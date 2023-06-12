@@ -7,10 +7,9 @@ import type { Post } from '@/server/modules/posts/posts.schemas';
 
 type PostListProps = Readonly<{
 	posts: Post[];
-	username: string;
 }>;
 
-export const PostList = ({ posts, username }: PostListProps) => {
+export const PostList = ({ posts }: PostListProps) => {
 	if (posts.length === 0) {
 		return <EmptyPostsAlert />;
 	}
@@ -18,7 +17,7 @@ export const PostList = ({ posts, username }: PostListProps) => {
 	return (
 		<ol className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
 			{posts.map((post) => (
-				<Link key={post.id} href={`/${username}?post=${post.id}`}>
+				<Link key={post.id} href={`/${post.author.username}?post=${post.id}`}>
 					<SinglePost post={post} />
 				</Link>
 			))}
