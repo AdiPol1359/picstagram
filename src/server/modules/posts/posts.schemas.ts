@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { POST_DESCRIPTION_MAX_LENGTH } from '@/lib/constants';
+
 import type { TypeOf } from 'zod';
 
 export const postSchema = z.object({
@@ -11,6 +13,11 @@ export const postSchema = z.object({
 		username: z.string().nullable(),
 		name: z.string().nullable(),
 	}),
+});
+
+export const createPostSchema = z.object({
+	description: z.string().nonempty().max(POST_DESCRIPTION_MAX_LENGTH).trim(),
+	images: z.array(z.custom<File>((value) => value instanceof Blob)),
 });
 
 export const getAllPostsSchema = z.object({
