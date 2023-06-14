@@ -1,4 +1,5 @@
 export const PROJECT_NAME = 'Picstagram';
+export const PROJECT_PRIMARY_COLOR = '#fe67bA';
 
 export const DEFAULT_ERROR_MESSAGE = 'An unexpected error occurred!';
 export const DEFAULT_PROFILE_BIOGRAPHY = 'No bio yet.';
