@@ -4,6 +4,7 @@ import { mapPrismaPostToPost } from './posts.mapper';
 import {
 	deletePostById,
 	getAllUserPosts,
+	getLatestPosts,
 	getUserPostById,
 } from './posts.service';
 import { getFileNameFromUrl } from './posts.utils';
@@ -17,6 +18,12 @@ import type {
 } from './posts.schemas';
 
 import type { ProtectedContext } from '@/server/context';
+
+export const getLatestPostsHandler = async () => {
+	const posts = await getLatestPosts();
+
+	return posts.map(mapPrismaPostToPost);
+};
 
 export const getAllPostsHandler = async ({ username }: GetAllPostsInput) => {
 	const posts = await getAllUserPosts(username);

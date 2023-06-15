@@ -17,6 +17,9 @@ export const select = {
 	},
 } satisfies Prisma.PostSelect;
 
+export const getLatestPosts = () =>
+	prisma.post.findMany({ orderBy: { createdAt: 'desc' }, select });
+
 export const getAllUserPosts = (username: string) =>
 	prisma.post.findMany({
 		where: { user: { username } },

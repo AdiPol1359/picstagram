@@ -8,11 +8,11 @@ import { StatisticItem } from './StatisticItem';
 
 import type { Post } from '@/server/modules/posts/posts.schemas';
 
-type SinglePostProps = Readonly<{
+type UserPostListItemProps = Readonly<{
 	post: Post;
 }>;
 
-export const SinglePost = ({ post }: SinglePostProps) => {
+export const UserPostListItem = ({ post }: UserPostListItemProps) => {
 	const {
 		id,
 		images,
@@ -21,7 +21,7 @@ export const SinglePost = ({ post }: SinglePostProps) => {
 	} = post;
 
 	return (
-		<article className="group relative aspect-square overflow-hidden rounded-md">
+		<li className="group relative aspect-square overflow-hidden rounded-md">
 			<DeletePostButton post={post} />
 			<Link href={{ pathname: `/${username}`, query: { post: id } }}>
 				<Image
@@ -38,6 +38,6 @@ export const SinglePost = ({ post }: SinglePostProps) => {
 					<StatisticItem icon={<AiFillMessage />} value={0} />
 				</ul>
 			</Link>
-		</article>
+		</li>
 	);
 };

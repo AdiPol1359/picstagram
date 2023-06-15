@@ -1,13 +1,13 @@
 import { EmptyPostsAlert } from './EmptyPostsAlert';
-import { SinglePost } from './SinglePost/SinglePost';
+import { UserPostListItem } from './UserPostListItem/UserPostListItem';
 
 import type { Post } from '@/server/modules/posts/posts.schemas';
 
-type PostListProps = Readonly<{
+type UserPostListProps = Readonly<{
 	posts: Post[];
 }>;
 
-export const PostList = ({ posts }: PostListProps) => {
+export const UserPostList = ({ posts }: UserPostListProps) => {
 	if (posts.length === 0) {
 		return <EmptyPostsAlert />;
 	}
@@ -15,9 +15,7 @@ export const PostList = ({ posts }: PostListProps) => {
 	return (
 		<ol className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
 			{posts.map((post) => (
-				<li key={post.id}>
-					<SinglePost post={post} />
-				</li>
+				<UserPostListItem key={post.id} post={post} />
 			))}
 		</ol>
 	);
