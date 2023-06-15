@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-import { UserPostDetails } from './UserPostDetails';
+import { SinglePost } from './SinglePost';
 
 import { Modal } from '@/components/ui/Modal/Modal';
 import { useCacheValue } from '@/hooks/useCacheValue';
@@ -36,8 +36,7 @@ export const UserPostModal = ({ post }: UserPostModalProps) => {
 				replace(`/${value?.author.username}`);
 			}}
 		>
-			<Modal.Title>{value?.author.name}</Modal.Title>
-			{value && <UserPostDetails post={value} />}
+			{value && <SinglePost post={value} />}
 		</Modal>
 	);
 };

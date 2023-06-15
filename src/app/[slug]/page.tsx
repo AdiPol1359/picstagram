@@ -1,6 +1,6 @@
 import { CreatePostButton } from '@/components/main/CreatePostButton';
 import { UserHeader } from '@/components/main/UserHeader/UserHeader';
-import { UserPostModal } from '@/components/main/UserPostModal/UserPostModal';
+import { UserPostModal } from '@/components/main/UserPostModal';
 import { UserPosts } from '@/components/main/UserPosts/UserPosts';
 import { DEFAULT_PROFILE_BIOGRAPHY, PROJECT_NAME } from '@/lib/constants';
 import { env } from '@/lib/env.mjs';
