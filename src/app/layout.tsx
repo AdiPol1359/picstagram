@@ -34,7 +34,7 @@ export default function RootLayout({
 			<body>
 				<NextTopLoader
 					color={PROJECT_PRIMARY_COLOR}
-					height={2}
+					height={3}
 					showSpinner={false}
 				/>
 				<AppProviders>
