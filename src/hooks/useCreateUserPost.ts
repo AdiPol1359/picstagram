@@ -1,9 +1,13 @@
 import { useMutation } from '@tanstack/react-query';
 
+import { useRefreshUserPosts } from './useRefreshUserPosts';
+
 import { createPost } from '@/lib/services/posts.service';
 
 export const useCreateUserPost = () => {
 	const { mutateAsync, isLoading } = useMutation({ mutationFn: createPost });
+
+	const refresh = useRefreshUserPosts();
 
 	const createUserPost = async ({
 		description,
@@ -12,7 +16,13 @@ export const useCreateUserPost = () => {
 		description: string;
 		images: Blob[];
 	}) => {
-		await mutateAsync({ description, images });
+		const {
+			author: { username },
+		} = await mutateAsync({ description, images });
+
+		if (username) {
+			await refresh(username);
+		}
 	};
 
 	return { createUserPost, isLoading };
