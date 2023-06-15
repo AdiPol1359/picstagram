@@ -17,20 +17,23 @@ export const select = {
 	},
 } satisfies Prisma.PostSelect;
 
-export const getAllPostsByUsername = (username: string) =>
+export const getAllUserPosts = (username: string) =>
 	prisma.post.findMany({
 		where: { user: { username } },
 		orderBy: { createdAt: 'desc' },
 		select,
 	});
 
-export const getPostById = ({
-	id,
-	username,
-}: {
-	id: number;
-	username: string;
-}) => prisma.post.findFirst({ where: { id, user: { username } }, select });
+export const getUserPostById = (
+	id: number,
+	user:
+		| { id: string; username?: undefined }
+		| { username: string; id?: undefined }
+) =>
+	prisma.post.findFirst({
+		where: { id, user },
+		select,
+	});
 
 export const createPost = ({
 	description,
@@ -53,3 +56,6 @@ export const createPost = ({
 		},
 		select,
 	});
+
+export const deletePostById = (id: number) =>
+	prisma.post.delete({ where: { id }, select });

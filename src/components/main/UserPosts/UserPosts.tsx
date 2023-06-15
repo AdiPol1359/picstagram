@@ -12,7 +12,7 @@ type UserPostsProps = Readonly<{
 }>;
 
 export const UserPosts = ({ user: { username } }: UserPostsProps) => {
-	const { posts, isLoading } = useGetUserPosts(username || '');
+	const { posts, isLoading } = useGetUserPosts(username);
 
 	return (
 		<LoadingContent isLoading={isLoading}>

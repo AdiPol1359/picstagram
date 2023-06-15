@@ -1,12 +1,25 @@
 import { TRPCError } from '@trpc/server';
 
 import { mapPrismaPostToPost } from './posts.mapper';
-import { getAllPostsByUsername, getPostById } from './posts.service';
+import {
+	deletePostById,
+	getAllUserPosts,
+	getUserPostById,
+} from './posts.service';
+import { getFileNameFromUrl } from './posts.utils';
 
-import type { GetAllPostsInput, GetPostByIdInput } from './posts.schemas';
+import { deleteImage } from '@/lib/services/cloudinary.service';
+
+import type {
+	DeletePostByIdInput,
+	GetAllPostsInput,
+	GetPostByIdInput,
+} from './posts.schemas';
+
+import type { ProtectedContext } from '@/server/context';
 
 export const getAllPostsHandler = async ({ username }: GetAllPostsInput) => {
-	const posts = await getAllPostsByUsername(username);
+	const posts = await getAllUserPosts(username);
 
 	return posts.map(mapPrismaPostToPost);
 };
@@ -15,7 +28,7 @@ export const getPostByIdHandler = async ({
 	id,
 	username,
 }: GetPostByIdInput) => {
-	const post = await getPostById({ id, username });
+	const post = await getUserPostById(id, { username });
 
 	if (!post) {
 		throw new TRPCError({
@@ -23,6 +36,29 @@ export const getPostByIdHandler = async ({
 			message: 'Post not found!',
 		});
 	}
+
+	return mapPrismaPostToPost(post);
+};
+
+export const deletePostByIdHandler = async (
+	{ session }: ProtectedContext,
+	{ id }: DeletePostByIdInput
+) => {
+	const post = await getUserPostById(id, { id: session.user.id });
+
+	if (!post) {
+		throw new TRPCError({
+			code: 'NOT_FOUND',
+			message: 'Post not found!',
+		});
+	}
+
+	const names = post.image
+		.map(({ url }) => getFileNameFromUrl(url))
+		.filter(Boolean);
+
+	await Promise.all(names.map(deleteImage));
+	await deletePostById(id);
 
 	return mapPrismaPostToPost(post);
 };
