@@ -3,14 +3,14 @@
 import { LatestPostList } from './LatestPostList';
 
 import { LoadingContent } from '@/components/common/LoadingContent';
-import { trpc } from '@/lib/utils/trpc';
+import { useGetLatestPosts } from '@/hooks/useGetLatestPosts';
 
 export const LatestPosts = () => {
-	const { data = [], isLoading } = trpc.posts.getLatest.useQuery();
+	const { posts, isLoading } = useGetLatestPosts();
 
 	return (
 		<LoadingContent isLoading={isLoading}>
-			<LatestPostList posts={data} />
+			<LatestPostList posts={posts} />
 		</LoadingContent>
 	);
 };
