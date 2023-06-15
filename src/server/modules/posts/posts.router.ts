@@ -1,13 +1,18 @@
 import { z } from 'zod';
 
-import { getAllPostsHandler, getPostByIdHandler } from './posts.handler';
 import {
+	deletePostByIdHandler,
+	getAllPostsHandler,
+	getPostByIdHandler,
+} from './posts.handler';
+import {
+	deletePostByIdSchema,
 	getAllPostsSchema,
 	getPostByIdSchema,
 	postSchema,
 } from './posts.schemas';
 
-import { publicProcedure, router } from '@/server/trpc';
+import { protectedProcedure, publicProcedure, router } from '@/server/trpc';
 
 export const postsRouter = router({
 	getAll: publicProcedure
@@ -18,4 +23,8 @@ export const postsRouter = router({
 		.input(getPostByIdSchema)
 		.output(postSchema)
 		.query(({ input }) => getPostByIdHandler(input)),
+	deleteById: protectedProcedure
+		.input(deletePostByIdSchema)
+		.output(postSchema)
+		.mutation(({ ctx, input }) => deletePostByIdHandler(ctx, input)),
 });

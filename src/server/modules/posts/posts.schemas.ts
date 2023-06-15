@@ -29,6 +29,11 @@ export const getPostByIdSchema = z.object({
 	username: z.string(),
 });
 
+export const deletePostByIdSchema = z.object({
+	id: z.number(),
+});
+
 export type Post = TypeOf<typeof postSchema>;
 export type GetAllPostsInput = TypeOf<typeof getAllPostsSchema>;
 export type GetPostByIdInput = TypeOf<typeof getPostByIdSchema>;
+export type DeletePostByIdInput = TypeOf<typeof deletePostByIdSchema>;

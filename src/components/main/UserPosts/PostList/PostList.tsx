@@ -1,5 +1,3 @@
-import Link from 'next/link';
-
 import { EmptyPostsAlert } from './EmptyPostsAlert';
 import { SinglePost } from './SinglePost/SinglePost';
 
@@ -17,9 +15,9 @@ export const PostList = ({ posts }: PostListProps) => {
 	return (
 		<ol className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
 			{posts.map((post) => (
-				<Link key={post.id} href={`/${post.author.username}?post=${post.id}`}>
+				<li key={post.id}>
 					<SinglePost post={post} />
-				</Link>
+				</li>
 			))}
 		</ol>
 	);
