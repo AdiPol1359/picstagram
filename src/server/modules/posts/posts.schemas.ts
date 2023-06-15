@@ -12,6 +12,7 @@ export const postSchema = z.object({
 		id: z.string(),
 		username: z.string().nullable(),
 		name: z.string().nullable(),
+		image: z.string().nullable(),
 	}),
 });
 

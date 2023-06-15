@@ -13,6 +13,7 @@ export const select = {
 			id: true,
 			username: true,
 			name: true,
+			image: true,
 		},
 	},
 } satisfies Prisma.PostSelect;
