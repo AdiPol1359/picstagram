@@ -1,6 +1,6 @@
 'use client';
 
-import { PostList } from './PostList/PostList';
+import { UserPostList } from './UserPostList/UserPostList';
 
 import { LoadingContent } from '@/components/common/LoadingContent';
 import { useGetUserPosts } from '@/hooks/useGetUserPosts';
@@ -16,7 +16,7 @@ export const UserPosts = ({ user: { username } }: UserPostsProps) => {
 
 	return (
 		<LoadingContent isLoading={isLoading}>
-			<PostList posts={posts} />
+			<UserPostList posts={posts} />
 		</LoadingContent>
 	);
 };

@@ -1,3 +1,10 @@
+import { LatestPosts } from '@/components/main/LatestPosts/LatestPosts';
+
 export default function IndexPage() {
-	return <div className="text-red-400">Hello world!</div>;
+	return (
+		<>
+			<h1 className="text-3xl font-semibold">Latest posts</h1>
+			<LatestPosts />
+		</>
+	);
 }
