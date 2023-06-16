@@ -42,6 +42,7 @@ model User {
   follower      UsersFollows[] @relation("following")
   following     UsersFollows[] @relation("follower")
   post          Post[]
+  like          Like[]
 
   @@map("user")
 }
@@ -75,8 +76,19 @@ model Post {
   updatedAt   DateTime @updatedAt @map("updated_at")
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   image       Image[]
+  like        Like[]
 
   @@map("post")
+}
+
+model Like {
+  postId Int    @map("post_id")
+  userId String @map("user_id")
+  post   Post   @relation(fields: [postId], references: [id])
+  user   User   @relation(fields: [userId], references: [id])
+
+  @@id([postId, userId])
+  @@map("like")
 }
 
 model Image {

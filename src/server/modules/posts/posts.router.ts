@@ -18,7 +18,7 @@ import { protectedProcedure, publicProcedure, router } from '@/server/trpc';
 export const postsRouter = router({
 	getLatest: publicProcedure
 		.output(z.array(postSchema))
-		.query(() => getLatestPostsHandler()),
+		.query(({ ctx }) => getLatestPostsHandler(ctx)),
 	getAll: publicProcedure
 		.input(getAllPostsSchema)
 		.output(z.array(postSchema))
@@ -26,7 +26,7 @@ export const postsRouter = router({
 	getById: publicProcedure
 		.input(getPostByIdSchema)
 		.output(postSchema)
-		.query(({ input }) => getPostByIdHandler(input)),
+		.query(({ ctx, input }) => getPostByIdHandler(ctx, input)),
 	deleteById: protectedProcedure
 		.input(deletePostByIdSchema)
 		.output(postSchema)

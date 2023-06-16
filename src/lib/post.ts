@@ -1,6 +1,7 @@
 import { TRPCError } from '@trpc/server';
 import { notFound } from 'next/navigation';
 
+import { createContext } from '@/server/context';
 import { appRouter } from '@/server/router';
 
 export const parsePostQuery = (query: string | string[] | undefined) => {
@@ -18,7 +19,7 @@ export const getPostById = async ({
 	id: number;
 	username: string;
 }) => {
-	const caller = appRouter.createCaller({ session: null });
+	const caller = appRouter.createCaller(await createContext());
 
 	try {
 		return await caller.posts.getById({ id, username });

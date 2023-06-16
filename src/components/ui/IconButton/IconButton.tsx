@@ -4,29 +4,31 @@ import type { ReactNode } from 'react';
 
 const variants = {
 	default: 'text-gray-600 hover:bg-gray-100 hover:text-primary',
-	danger:
-		'border border-transparent text-red-600 hover:border-red-600 hover:bg-red-600/20',
+	danger: 'text-red-600 hover:border-red-600 hover:bg-red-600/20',
 } as const;
 
 type IconButtonProps = Readonly<{
-	onClick?: () => void;
 	variant?: keyof typeof variants;
+	disabled?: boolean;
+	onClick?: () => void;
 	label: string;
 	icon: ReactNode;
 }>;
 
 export const IconButton = ({
-	onClick,
 	variant = 'default',
+	disabled,
+	onClick,
 	label,
 	icon,
 }: IconButtonProps) => (
 	<button
 		type="button"
 		aria-label={label}
+		disabled={disabled}
 		onClick={onClick}
 		className={twMerge(
-			'duration-250 rounded-md p-1 transition-colors',
+			'duration-250 rounded-md border border-transparent p-1 transition-colors disabled:pointer-events-none disabled:opacity-50',
 			variants[variant]
 		)}
 	>

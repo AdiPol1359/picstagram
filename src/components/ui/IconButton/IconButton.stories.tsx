@@ -24,3 +24,9 @@ export const Danger: Story = {
 		variant: 'danger',
 	},
 };
+
+export const Disabled: Story = {
+	args: {
+		disabled: true,
+	},
+};
