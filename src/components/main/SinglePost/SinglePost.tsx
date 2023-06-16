@@ -23,7 +23,7 @@ export const SinglePost = ({
 	const [likes, setLikes] = useState(statistics.likes);
 	const [isLike, setIsLike] = useState(like);
 
-	const handleLikeChange = () => {
+	const handleLikeClick = () => {
 		setLikes((prev) => prev + (isLike ? -1 : 1));
 		setIsLike((prev) => !prev);
 	};
@@ -38,7 +38,7 @@ export const SinglePost = ({
 				<p className="font-medium">{author.username}</p>
 			</Link>
 			<ImagesSlider images={images} />
-			<LikeButton postId={id} isLike={isLike} onChange={handleLikeChange} />
+			<LikeButton postId={id} isLike={isLike} onClick={handleLikeClick} />
 			<p className="font-medium">
 				{formatNumber(likes)} {likesPluralize(likes)}
 			</p>

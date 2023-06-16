@@ -7,17 +7,17 @@ import { useToggleLike } from '@/hooks/useToggleLike';
 type LikeButtonProps = Readonly<{
 	postId: number;
 	isLike: boolean;
-	onChange?: () => void;
+	onClick?: () => void;
 }>;
 
-export const LikeButton = ({ postId, isLike, onChange }: LikeButtonProps) => {
+export const LikeButton = ({ postId, isLike, onClick }: LikeButtonProps) => {
 	const { toggleLike, isLoading } = useToggleLike(isLike);
 
 	const requiredSession = useRequiredSession();
 
 	const handleButtonClick = async () => {
 		await toggleLike(postId);
-		onChange?.();
+		onClick?.();
 	};
 
 	return (
