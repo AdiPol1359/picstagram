@@ -24,7 +24,7 @@ export const mapPrismaUserToUser = (
 	username,
 	image,
 	biography,
+	follow: Boolean(follower?.length),
 	statistics: { posts, followers, following },
 	...(self && { email }),
-	...(!!follower && { follow: follower.length > 0 }),
 });

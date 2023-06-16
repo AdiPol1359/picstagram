@@ -15,17 +15,15 @@ type FollowButtonProps = Readonly<{
 }>;
 
 export const FollowButton = ({ user: { id, follow } }: FollowButtonProps) => {
-	const router = useRouter();
 	const requiredSession = useRequiredSession();
 
 	const { data } = useSession();
-	const { toggleFollow, isFollowing, isLoading } = useToggleFollow(
-		Boolean(follow)
-	);
+	const { refresh } = useRouter();
+	const { toggleFollow, isFollowing, isLoading } = useToggleFollow(follow);
 
 	const handleButtonClick = async () => {
 		await toggleFollow({ userId: id });
-		router.refresh();
+		refresh();
 	};
 
 	if (data?.user.id === id) {
