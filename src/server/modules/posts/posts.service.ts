@@ -2,10 +2,10 @@ import { createPostSelect } from './posts.utils';
 
 import { prisma } from '@/lib/prisma';
 
-export const getLatestPosts = (sessionUserId?: string) =>
+export const getLatestPosts = (userId?: string) =>
 	prisma.post.findMany({
 		orderBy: { createdAt: 'desc' },
-		select: createPostSelect(sessionUserId),
+		select: createPostSelect({ userId }),
 	});
 
 export const getAllUserPosts = (username: string) =>
@@ -20,11 +20,11 @@ export const getUserPostById = (
 	user:
 		| { id: string; username?: undefined }
 		| { username: string; id?: undefined },
-	sessionUserId?: string
+	userId?: string
 ) =>
 	prisma.post.findFirst({
 		where: { id, user },
-		select: createPostSelect(sessionUserId),
+		select: createPostSelect({ userId }),
 	});
 
 export const createPost = ({

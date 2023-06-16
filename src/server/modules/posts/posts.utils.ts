@@ -1,6 +1,6 @@
 import type { Prisma } from '@prisma/client';
 
-export const createPostSelect = (userId?: string) =>
+export const createPostSelect = ({ userId }: { userId?: string } = {}) =>
 	({
 		id: true,
 		description: true,
