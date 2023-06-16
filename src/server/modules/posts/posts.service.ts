@@ -1,42 +1,30 @@
+import { createPostSelect } from './posts.utils';
+
 import { prisma } from '@/lib/prisma';
 
-import type { Prisma } from '@prisma/client';
-
-export const select = {
-	id: true,
-	description: true,
-	image: {
-		select: { id: true, url: true },
-	},
-	user: {
-		select: {
-			id: true,
-			username: true,
-			name: true,
-			image: true,
-		},
-	},
-} satisfies Prisma.PostSelect;
-
-export const getLatestPosts = () =>
-	prisma.post.findMany({ orderBy: { createdAt: 'desc' }, select });
+export const getLatestPosts = (sessionUserId?: string) =>
+	prisma.post.findMany({
+		orderBy: { createdAt: 'desc' },
+		select: createPostSelect(sessionUserId),
+	});
 
 export const getAllUserPosts = (username: string) =>
 	prisma.post.findMany({
 		where: { user: { username } },
 		orderBy: { createdAt: 'desc' },
-		select,
+		select: createPostSelect(),
 	});
 
 export const getUserPostById = (
 	id: number,
 	user:
 		| { id: string; username?: undefined }
-		| { username: string; id?: undefined }
+		| { username: string; id?: undefined },
+	sessionUserId?: string
 ) =>
 	prisma.post.findFirst({
 		where: { id, user },
-		select,
+		select: createPostSelect(sessionUserId),
 	});
 
 export const createPost = ({
@@ -58,8 +46,8 @@ export const createPost = ({
 				},
 			},
 		},
-		select,
+		select: createPostSelect(),
 	});
 
 export const deletePostById = (id: number) =>
-	prisma.post.delete({ where: { id }, select });
+	prisma.post.delete({ where: { id }, select: createPostSelect() });

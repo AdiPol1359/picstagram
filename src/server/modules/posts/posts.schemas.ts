@@ -8,11 +8,15 @@ export const postSchema = z.object({
 	id: z.number(),
 	description: z.string(),
 	images: z.array(z.string()),
+	like: z.boolean(),
 	author: z.object({
 		id: z.string(),
 		username: z.string().nullable(),
 		name: z.string().nullable(),
 		image: z.string().nullable(),
+	}),
+	statistics: z.object({
+		likes: z.number(),
 	}),
 });
 

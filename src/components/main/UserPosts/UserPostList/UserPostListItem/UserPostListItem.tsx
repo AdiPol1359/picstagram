@@ -18,6 +18,7 @@ export const UserPostListItem = ({ post }: UserPostListItemProps) => {
 		images,
 		description,
 		author: { username },
+		statistics: { likes },
 	} = post;
 
 	return (
@@ -34,7 +35,7 @@ export const UserPostListItem = ({ post }: UserPostListItemProps) => {
 					<TbLayersSubtract className="absolute right-3 top-2.5 text-xl text-white" />
 				)}
 				<ul className="absolute left-0 top-0 flex h-full w-full items-center justify-center gap-x-7 bg-black/50 text-white opacity-0 transition-opacity duration-150 group-hover:opacity-100">
-					<StatisticItem icon={<AiFillHeart />} value={0} />
+					<StatisticItem icon={<AiFillHeart />} value={likes} />
 					<StatisticItem icon={<AiFillMessage />} value={0} />
 				</ul>
 			</Link>

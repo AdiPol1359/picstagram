@@ -17,10 +17,10 @@ import type {
 	GetPostByIdInput,
 } from './posts.schemas';
 
-import type { ProtectedContext } from '@/server/context';
+import type { Context, ProtectedContext } from '@/server/context';
 
-export const getLatestPostsHandler = async () => {
-	const posts = await getLatestPosts();
+export const getLatestPostsHandler = async ({ session }: Context) => {
+	const posts = await getLatestPosts(session?.user.id);
 
 	return posts.map(mapPrismaPostToPost);
 };
@@ -31,11 +31,11 @@ export const getAllPostsHandler = async ({ username }: GetAllPostsInput) => {
 	return posts.map(mapPrismaPostToPost);
 };
 
-export const getPostByIdHandler = async ({
-	id,
-	username,
-}: GetPostByIdInput) => {
-	const post = await getUserPostById(id, { username });
+export const getPostByIdHandler = async (
+	{ session }: Context,
+	{ id, username }: GetPostByIdInput
+) => {
+	const post = await getUserPostById(id, { username }, session?.user.id);
 
 	if (!post) {
 		throw new TRPCError({

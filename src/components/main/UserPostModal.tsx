@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
-import { SinglePost } from './SinglePost';
+import { SinglePost } from './SinglePost/SinglePost';
 
 import { Modal } from '@/components/ui/Modal/Modal';
 import { useCacheValue } from '@/hooks/useCacheValue';
@@ -18,7 +18,7 @@ type UserPostModalProps = Readonly<{
 export const UserPostModal = ({ post }: UserPostModalProps) => {
 	const { isOpen, openModal, closeModal } = useModal(false);
 	const { value, setCache } = useCacheValue<Post>();
-	const { replace } = useRouter();
+	const { replace, refresh } = useRouter();
 
 	useEffect(() => {
 		if (post) {
@@ -34,6 +34,7 @@ export const UserPostModal = ({ post }: UserPostModalProps) => {
 			isOpen={isOpen}
 			onClose={() => {
 				replace(`/${value?.author.username}`);
+				refresh();
 			}}
 		>
 			{value && <SinglePost post={value} />}
