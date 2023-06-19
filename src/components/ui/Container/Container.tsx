@@ -13,5 +13,5 @@ export const Container = ({
 	className,
 	children,
 }: ContainerProps) => (
-	<As className={twMerge('container mx-auto', className)}>{children}</As>
+	<As className={twMerge('mx-auto w-full max-w-4xl', className)}>{children}</As>
 );

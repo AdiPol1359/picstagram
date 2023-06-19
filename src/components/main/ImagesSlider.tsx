@@ -27,7 +27,7 @@ export const ImagesSlider = ({ images }: ImagesSliderProps) => {
 			navigation
 		>
 			{images.map((image) => (
-				<swiper-slide key={image} class="relative h-80">
+				<swiper-slide key={image} class="relative aspect-video">
 					<Image src={image} alt="Slide image" className="object-cover" fill />
 				</swiper-slide>
 			))}
