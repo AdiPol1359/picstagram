@@ -3,7 +3,7 @@ import { getPostById } from '@/lib/post';
 
 import type { PageParams } from '@/types';
 
-export default async function SinglePostPage({
+export default async function SinglePostModalPage({
 	params,
 }: {
 	params: PageParams<'slug'>;
