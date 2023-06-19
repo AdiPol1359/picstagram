@@ -27,8 +27,10 @@ const inter = Inter({
 
 export default function RootLayout({
 	children,
+	post,
 }: {
 	readonly children: ReactNode;
+	readonly post: ReactNode;
 }) {
 	return (
 		<html lang="en" className={inter.variable}>
@@ -42,6 +44,7 @@ export default function RootLayout({
 					<Header />
 					<Container as="main" className="px-2 py-9">
 						{children}
+						{post}
 					</Container>
 					<Footer />
 				</AppProviders>

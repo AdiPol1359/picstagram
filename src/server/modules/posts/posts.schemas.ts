@@ -32,7 +32,6 @@ export const getAllPostsSchema = z.object({
 
 export const getPostByIdSchema = z.object({
 	id: z.number(),
-	username: z.string(),
 });
 
 export const deletePostByIdSchema = z.object({

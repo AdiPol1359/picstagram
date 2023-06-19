@@ -5,7 +5,7 @@ import {
 	deletePostById,
 	getAllUserPosts,
 	getLatestPosts,
-	getUserPostById,
+	getPostById,
 } from './posts.service';
 import { getFileNameFromUrl } from './posts.utils';
 
@@ -33,9 +33,9 @@ export const getAllPostsHandler = async ({ username }: GetAllPostsInput) => {
 
 export const getPostByIdHandler = async (
 	{ session }: Context,
-	{ id, username }: GetPostByIdInput
+	{ id }: GetPostByIdInput
 ) => {
-	const post = await getUserPostById(id, { username }, session?.user.id);
+	const post = await getPostById(id, session?.user.id);
 
 	if (!post) {
 		throw new TRPCError({
@@ -51,9 +51,9 @@ export const deletePostByIdHandler = async (
 	{ session }: ProtectedContext,
 	{ id }: DeletePostByIdInput
 ) => {
-	const post = await getUserPostById(id, { id: session.user.id });
+	const post = await getPostById(id);
 
-	if (!post) {
+	if (post?.user.id !== session.user.id) {
 		throw new TRPCError({
 			code: 'NOT_FOUND',
 			message: 'Post not found!',
