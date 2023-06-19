@@ -15,7 +15,7 @@ export const AppProviders = ({ children }: AppProvidersProps) => (
 	<SessionProvider>
 		<TrpcProvider>
 			{children}
-			<Toaster position="top-right" />
+			<Toaster position="top-left" />
 		</TrpcProvider>
 	</SessionProvider>
 );
