@@ -1,6 +1,7 @@
 import { Inter } from 'next/font/google';
 import NextTopLoader from 'nextjs-toploader';
 
+import { Footer } from '@/components/main/Footer';
 import { Header } from '@/components/main/Header/Header';
 import { Container } from '@/components/ui/Container/Container';
 import { PROJECT_NAME, PROJECT_PRIMARY_COLOR } from '@/lib/constants';
@@ -42,6 +43,7 @@ export default function RootLayout({
 					<Container as="main" className="px-2 py-9">
 						{children}
 					</Container>
+					<Footer />
 				</AppProviders>
 			</body>
 		</html>
