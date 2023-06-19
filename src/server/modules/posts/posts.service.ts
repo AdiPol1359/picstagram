@@ -15,15 +15,9 @@ export const getAllUserPosts = (username: string) =>
 		select: createPostSelect(),
 	});
 
-export const getUserPostById = (
-	id: number,
-	user:
-		| { id: string; username?: undefined }
-		| { username: string; id?: undefined },
-	userId?: string
-) =>
+export const getPostById = (id: number, userId?: string) =>
 	prisma.post.findFirst({
-		where: { id, user },
+		where: { id },
 		select: createPostSelect({ userId }),
 	});
 

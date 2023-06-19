@@ -17,14 +17,13 @@ export const UserPostListItem = ({ post }: UserPostListItemProps) => {
 		id,
 		images,
 		description,
-		author: { username },
 		statistics: { likes },
 	} = post;
 
 	return (
 		<li className="group relative aspect-square overflow-hidden rounded-md">
 			<DeletePostButton post={post} />
-			<Link href={{ pathname: `/${username}`, query: { post: id } }}>
+			<Link href={`/post/${id}`}>
 				<Image
 					src={images[0]}
 					alt={description.substring(0, 10)}

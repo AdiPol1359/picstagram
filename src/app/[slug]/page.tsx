@@ -1,13 +1,13 @@
 import { CreatePostButton } from '@/components/main/CreatePostButton';
 import { UserHeader } from '@/components/main/UserHeader/UserHeader';
-import { UserPostModal } from '@/components/main/UserPostModal';
 import { UserPosts } from '@/components/main/UserPosts/UserPosts';
 import { DEFAULT_PROFILE_BIOGRAPHY, PROJECT_NAME } from '@/lib/constants';
 import { env } from '@/lib/env.mjs';
-import { getPostById, parsePostQuery } from '@/lib/post';
 import { getUserByUsername } from '@/lib/user';
 
 import type { Metadata } from 'next';
+
+import type { PageParams } from '@/types';
 
 export const generateMetadata = async ({
 	params: { slug },
@@ -33,27 +33,17 @@ export const generateMetadata = async ({
 };
 
 type UserPageProps = Readonly<{
-	params: { slug: string };
-	searchParams: { post?: string | string[] };
+	params: PageParams<'slug'>;
 }>;
 
-export default async function UserPage({
-	params: { slug },
-	searchParams,
-}: UserPageProps) {
-	const postId = parsePostQuery(searchParams.post);
-
-	const [user, post] = await Promise.all([
-		getUserByUsername(slug),
-		postId ? getPostById({ id: postId, username: slug }) : null,
-	]);
+export default async function UserPage({ params: { slug } }: UserPageProps) {
+	const user = await getUserByUsername(slug);
 
 	return (
 		<>
 			<UserHeader user={user} />
 			<UserPosts user={user} />
 			<CreatePostButton user={user} />
-			<UserPostModal post={post} />
 		</>
 	);
 }
