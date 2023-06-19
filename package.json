@@ -27,6 +27,7 @@
 		"@zodios/core": "10.9.1",
 		"axios": "1.4.0",
 		"bcrypt": "5.1.0",
+		"dayjs": "1.11.8",
 		"next": "13.4.4",
 		"next-auth": "4.22.1",
 		"nextjs-toploader": "1.4.2",

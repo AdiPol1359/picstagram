@@ -7,6 +7,7 @@ import type { TypeOf } from 'zod';
 export const postSchema = z.object({
 	id: z.number(),
 	description: z.string(),
+	createdAt: z.string(),
 	images: z.array(z.string()),
 	like: z.boolean(),
 	author: z.object({
