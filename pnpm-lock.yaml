@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -41,6 +41,9 @@ dependencies:
   bcrypt:
     specifier: 5.1.0
     version: 5.1.0
+  dayjs:
+    specifier: 1.11.8
+    version: 1.11.8
   next:
     specifier: 13.4.4
     version: 13.4.4(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
@@ -6514,6 +6517,10 @@ packages:
     dependencies:
       '@babel/runtime': 7.22.5
     dev: true
+
+  /dayjs@1.11.8:
+    resolution: {integrity: sha512-LcgxzFoWMEPO7ggRv1Y2N31hUf2R0Vj7fuy/m+Bg1K8rr+KAs1AEy4y9jd5DXe8pbHgX+srkHNS7TH6Q6ZhYeQ==}
+    dev: false
 
   /debug@2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}

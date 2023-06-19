@@ -7,6 +7,7 @@ export const mapPrismaPostToPost = ({
 	description,
 	image,
 	like,
+	createdAt,
 	_count,
 	user: { id: userId, image: userImage, username, name },
 }: Prisma.PostGetPayload<{
@@ -14,6 +15,7 @@ export const mapPrismaPostToPost = ({
 }>): Post => ({
 	id,
 	description,
+	createdAt: createdAt.toISOString(),
 	images: image.map(({ url }) => url),
 	like: Boolean(like?.length),
 	author: {

@@ -4,6 +4,7 @@ export const createPostSelect = ({ userId }: { userId?: string } = {}) =>
 	({
 		id: true,
 		description: true,
+		createdAt: true,
 		image: {
 			select: { id: true, url: true },
 		},
