@@ -2,7 +2,7 @@
 
 import { LatestPostList } from './LatestPostList';
 
-import { LoadingSpinner } from '@/components/common/LoadingSpinner';
+import { Spinner } from '@/components/ui/Spinner/Spinner';
 import { useGetLatestPosts } from '@/hooks/useGetLatestPosts';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 
@@ -21,7 +21,7 @@ export const LatestPosts = () => {
 	return (
 		<>
 			<LatestPostList posts={posts} />
-			{loading && <LoadingSpinner />}
+			{loading && <Spinner center />}
 		</>
 	);
 };

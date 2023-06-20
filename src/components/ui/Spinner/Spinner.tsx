@@ -10,10 +10,11 @@ const sizes = {
 
 type SpinnerProps = Readonly<{
 	size?: keyof typeof sizes;
+	center?: boolean;
 }>;
 
-export const Spinner = ({ size = 'md' }: SpinnerProps) => (
-	<div role="status" className="w-fit">
+export const Spinner = ({ size = 'md', center }: SpinnerProps) => (
+	<div role="status" className={twMerge('w-fit', center && 'mx-auto')}>
 		<svg
 			aria-hidden="true"
 			viewBox="0 0 100 101"

@@ -1,4 +1,4 @@
-import { LoadingSpinner } from './LoadingSpinner';
+import { Spinner } from '../ui/Spinner/Spinner';
 
 import type { ReactNode } from 'react';
 
@@ -12,7 +12,7 @@ export const LoadingContent = ({
 	children,
 }: LoadingContentProps) => {
 	if (isLoading) {
-		return <LoadingSpinner />;
+		return <Spinner center />;
 	}
 
 	return <>{children}</>;
