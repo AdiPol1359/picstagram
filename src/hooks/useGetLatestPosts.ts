@@ -1,10 +1,12 @@
 import { trpc } from '@/lib/utils/trpc';
 
 export const useGetLatestPosts = () => {
-	const { data: posts = [], ...rest } = trpc.posts.getLatest.useQuery(
-		undefined,
-		{ cacheTime: 0 }
+	const { data, ...rest } = trpc.posts.getLatest.useInfiniteQuery(
+		{ limit: 3 },
+		{ cacheTime: 0, getNextPageParam: ({ nextCursor }) => nextCursor }
 	);
+
+	const posts = data?.pages.flatMap(({ items }) => items) || [];
 
 	return { posts, ...rest };
 };

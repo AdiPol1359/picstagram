@@ -14,15 +14,23 @@ import { deleteImage } from '@/lib/services/cloudinary.service';
 import type {
 	DeletePostByIdInput,
 	GetAllPostsInput,
+	GetLatestPostsInput,
 	GetPostByIdInput,
 } from './posts.schemas';
 
 import type { Context, ProtectedContext } from '@/server/context';
 
-export const getLatestPostsHandler = async ({ session }: Context) => {
-	const posts = await getLatestPosts(session?.user.id);
+export const getLatestPostsHandler = async (
+	{ session }: Context,
+	{ limit, cursor }: GetLatestPostsInput
+) => {
+	const posts = await getLatestPosts({ limit, cursor }, session?.user.id);
+	const nextCursor = posts.length < limit ? null : posts.at(-1)?.id;
 
-	return posts.map(mapPrismaPostToPost);
+	return {
+		nextCursor: nextCursor || null,
+		items: posts.map(mapPrismaPostToPost),
+	};
 };
 
 export const getAllPostsHandler = async ({ username }: GetAllPostsInput) => {

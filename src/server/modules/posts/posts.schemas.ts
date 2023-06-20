@@ -21,6 +21,16 @@ export const postSchema = z.object({
 	}),
 });
 
+export const latestPostsSchema = z.object({
+	items: z.array(postSchema),
+	nextCursor: z.number().nullable(),
+});
+
+export const getLatestPostsSchema = z.object({
+	limit: z.number().min(1).max(100).optional().default(3),
+	cursor: z.number().optional(),
+});
+
 export const createPostSchema = z.object({
 	description: z.string().nonempty().max(POST_DESCRIPTION_MAX_LENGTH).trim(),
 	images: z.array(z.custom<File>((value) => value instanceof Blob)),
@@ -39,6 +49,7 @@ export const deletePostByIdSchema = z.object({
 });
 
 export type Post = TypeOf<typeof postSchema>;
+export type GetLatestPostsInput = TypeOf<typeof getLatestPostsSchema>;
 export type GetAllPostsInput = TypeOf<typeof getAllPostsSchema>;
 export type GetPostByIdInput = TypeOf<typeof getPostByIdSchema>;
 export type DeletePostByIdInput = TypeOf<typeof deletePostByIdSchema>;
