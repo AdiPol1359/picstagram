@@ -2,15 +2,26 @@
 
 import { LatestPostList } from './LatestPostList';
 
-import { LoadingContent } from '@/components/common/LoadingContent';
+import { Spinner } from '@/components/ui/Spinner/Spinner';
 import { useGetLatestPosts } from '@/hooks/useGetLatestPosts';
+import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
 
 export const LatestPosts = () => {
-	const { posts, isLoading } = useGetLatestPosts();
+	const { posts, hasNextPage, isLoading, isFetchingNextPage, fetchNextPage } =
+		useGetLatestPosts();
+
+	const loading = isLoading || isFetchingNextPage;
+
+	useInfiniteScroll(() => {
+		if (!loading && hasNextPage) {
+			fetchNextPage();
+		}
+	});
 
 	return (
-		<LoadingContent isLoading={isLoading}>
+		<>
 			<LatestPostList posts={posts} />
-		</LoadingContent>
+			{loading && <Spinner center />}
+		</>
 	);
 };

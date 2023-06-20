@@ -2,10 +2,16 @@ import { createPostSelect } from './posts.utils';
 
 import { prisma } from '@/lib/prisma';
 
-export const getLatestPosts = (userId?: string) =>
+export const getLatestPosts = (
+	{ limit, cursor }: { limit: number; cursor?: number },
+	userId?: string
+) =>
 	prisma.post.findMany({
 		orderBy: { createdAt: 'desc' },
 		select: createPostSelect({ userId }),
+		take: limit,
+		skip: cursor ? 1 : 0,
+		...(cursor && { cursor: { id: cursor } }),
 	});
 
 export const getAllUserPosts = (username: string) =>

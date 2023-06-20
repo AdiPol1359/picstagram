@@ -12,11 +12,7 @@ export const LoadingContent = ({
 	children,
 }: LoadingContentProps) => {
 	if (isLoading) {
-		return (
-			<div className="flex justify-center">
-				<Spinner />
-			</div>
-		);
+		return <Spinner center />;
 	}
 
 	return <>{children}</>;
