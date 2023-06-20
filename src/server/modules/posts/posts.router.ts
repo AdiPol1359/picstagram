@@ -1,5 +1,3 @@
-import { z } from 'zod';
-
 import {
 	deletePostByIdHandler,
 	getAllPostsHandler,
@@ -7,6 +5,7 @@ import {
 	getPostByIdHandler,
 } from './posts.handler';
 import {
+	allPostsSchema,
 	deletePostByIdSchema,
 	getAllPostsSchema,
 	getLatestPostsSchema,
@@ -24,7 +23,7 @@ export const postsRouter = router({
 		.query(({ ctx, input }) => getLatestPostsHandler(ctx, input)),
 	getAll: publicProcedure
 		.input(getAllPostsSchema)
-		.output(z.array(postSchema))
+		.output(allPostsSchema)
 		.query(({ input }) => getAllPostsHandler(input)),
 	getById: publicProcedure
 		.input(getPostByIdSchema)

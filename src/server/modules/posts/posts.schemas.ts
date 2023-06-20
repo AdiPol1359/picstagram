@@ -21,14 +21,14 @@ export const postSchema = z.object({
 	}),
 });
 
-export const latestPostsSchema = z.object({
-	items: z.array(postSchema),
-	nextCursor: z.number().nullable(),
-});
-
 export const getLatestPostsSchema = z.object({
 	limit: z.number().min(1).max(100).optional().default(3),
 	cursor: z.number().optional(),
+});
+
+export const latestPostsSchema = z.object({
+	items: z.array(postSchema),
+	nextCursor: z.number().nullable(),
 });
 
 export const createPostSchema = z.object({
@@ -39,6 +39,8 @@ export const createPostSchema = z.object({
 export const getAllPostsSchema = z.object({
 	username: z.string(),
 });
+
+export const allPostsSchema = z.array(postSchema);
 
 export const getPostByIdSchema = z.object({
 	id: z.number(),
