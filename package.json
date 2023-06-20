@@ -10,7 +10,7 @@
 		"start": "next start",
 		"start:dev": "wait-on tcp:5432 -i 1000 && pnpm db:migrate && next dev",
 		"start:db": "docker compose up",
-		"db:migrate": "dotenv -e .env.local prisma migrate deploy",
+		"db:migrate": "dotenv -e .env.local prisma migrate dev",
 		"storybook:dev": "storybook dev -p 6006",
 		"storybook:build": "storybook build"
 	},
