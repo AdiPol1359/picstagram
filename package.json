@@ -5,6 +5,7 @@
 	"private": true,
 	"scripts": {
 		"prepare": "husky install",
+		"test": "vitest",
 		"build": "prisma generate && next build",
 		"dev": "concurrently --kill-others-on-fail \"pnpm start:db\" \"pnpm start:dev\"",
 		"start": "next start",
@@ -56,6 +57,7 @@
 		"@types/react-dom": "18.2.5",
 		"@typescript-eslint/eslint-plugin": "5.59.11",
 		"@typescript-eslint/parser": "5.59.11",
+		"@vitejs/plugin-react": "4.0.1",
 		"autoprefixer": "10.4.14",
 		"concurrently": "8.2.0",
 		"dotenv-cli": "7.2.1",
@@ -67,6 +69,7 @@
 		"eslint-plugin-prettier": "4.2.1",
 		"eslint-plugin-simple-import-sort": "10.0.0",
 		"husky": "8.0.3",
+		"jsdom": "22.1.0",
 		"lint-staged": "13.2.2",
 		"postcss": "8.4.24",
 		"prettier-plugin-tailwindcss": "0.3.0",
@@ -75,6 +78,7 @@
 		"tailwind-scrollbar": "3.0.4",
 		"tailwindcss": "3.3.2",
 		"typescript": "5.0.4",
+		"vitest": "0.32.2",
 		"wait-on": "7.0.1"
 	}
 }
