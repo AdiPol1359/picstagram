@@ -3,12 +3,12 @@ import { describe, expect, it } from 'vitest';
 import { isObjectKey } from './object';
 
 describe('object', () => {
-	const object = {
-		foo: 'foo',
-		bar: 'bar',
-	};
-
 	describe('isObjectKey', () => {
+		const object = {
+			foo: 'foo',
+			bar: 'bar',
+		};
+
 		it('should display that the property exists in the given object', () => {
 			expect(isObjectKey('foo', object)).toBe(true);
 		});
