@@ -42,7 +42,7 @@ export default function RootLayout({
 				/>
 				<AppProviders>
 					<Header />
-					<Container as="main" className="px-2 py-9">
+					<Container as="main" className="mt-16 px-2 py-9">
 						{children}
 						{post}
 					</Container>
