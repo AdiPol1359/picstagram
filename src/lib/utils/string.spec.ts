@@ -10,11 +10,11 @@ describe('string', () => {
 	});
 
 	describe('getFirstLetter', () => {
-		it('should return only first letter', () => {
+		it('should only return the first letter', () => {
 			expect(getFirstLetter('Foo')).toBe('F');
 		});
 
-		it('should return only first letter and make uppercase', () => {
+		it('should only return the first letter and make it uppercase', () => {
 			expect(getFirstLetter('bar')).toBe('B');
 		});
 	});
