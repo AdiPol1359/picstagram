@@ -1,6 +1,6 @@
 import { Avatar } from '../ui/Avatar/Avatar';
 
-import { getFirstLetter } from '@/lib/utils/utils';
+import { getFirstLetter } from '@/lib/utils/string';
 
 import type { ComponentProps } from 'react';
 
