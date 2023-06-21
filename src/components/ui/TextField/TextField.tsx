@@ -14,6 +14,7 @@ type TextFieldProps = Readonly<{
 	name?: string;
 	label?: string;
 	error?: string;
+	value?: string;
 	icon?: ReactNode;
 	onChange?: ChangeEventHandler<HTMLInputElement>;
 	onBlur?: FocusEventHandler<HTMLInputElement>;
@@ -30,6 +31,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 			name,
 			label,
 			error,
+			value,
 			icon,
 			onChange,
 			onBlur,
@@ -49,6 +51,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 						name={name}
 						ref={ref}
 						type={type}
+						value={value}
 						placeholder={placeholder}
 						required={required}
 						onChange={onChange}

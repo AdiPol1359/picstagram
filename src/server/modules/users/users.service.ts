@@ -69,6 +69,18 @@ export const getUserByUsername = (username: string, followerId?: string) =>
 		select: createUserSelect({ followerId }),
 	});
 
+export const searchUsers = (search: string, followerId?: string) =>
+	prisma.user.findMany({
+		where: {
+			OR: [
+				{ username: { contains: search, mode: 'insensitive' } },
+				{ name: { contains: search, mode: 'insensitive' } },
+			],
+		},
+		take: 4,
+		select: createUserSelect({ followerId }),
+	});
+
 export const initCreatedUser = ({ id, email, username }: User) => {
 	if (username || !email) return null;
 

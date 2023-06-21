@@ -45,7 +45,12 @@ export const getUserByUsernameSchema = z.object({
 	username: z.string(),
 });
 
+export const searchUsersSchema = z.object({
+	search: z.string(),
+});
+
 export type User = TypeOf<typeof userSchema>;
 export type CreateUserInput = TypeOf<typeof createUserSchema>;
 export type UpdateUserInput = TypeOf<typeof updateUserSchema>;
 export type GetUserByUsernameInput = TypeOf<typeof getUserByUsernameSchema>;
+export type SearchUsersInput = TypeOf<typeof searchUsersSchema>;

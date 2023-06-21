@@ -1,11 +1,15 @@
+import { z } from 'zod';
+
 import {
 	createUserHandler,
 	getUserByUsernameHandler,
+	searchUsersHandler,
 	updateUserHandler,
 } from './users.handlers';
 import {
 	createUserSchema,
 	getUserByUsernameSchema,
+	searchUsersSchema,
 	updateUserSchema,
 	userSchema,
 } from './users.schemas';
@@ -25,4 +29,8 @@ export const usersRouter = router({
 		.input(getUserByUsernameSchema)
 		.output(userSchema)
 		.query(({ ctx, input }) => getUserByUsernameHandler(ctx, input)),
+	search: publicProcedure
+		.input(searchUsersSchema)
+		.output(z.array(userSchema))
+		.query(({ ctx, input }) => searchUsersHandler(ctx, input)),
 });
