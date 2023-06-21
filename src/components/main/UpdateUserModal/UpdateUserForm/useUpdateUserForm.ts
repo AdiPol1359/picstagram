@@ -4,7 +4,8 @@ import { updateUserFormSchema } from './UpdateUserForm.schemas';
 
 import { useUpdateUser } from '@/hooks/useUpdateUser';
 import { useZodForm } from '@/hooks/useZodForm';
-import { capitalize, isObjectKey } from '@/lib/utils/utils';
+import { isObjectKey } from '@/lib/utils/object';
+import { capitalize } from '@/lib/utils/string';
 
 import type { User } from '@/server/modules/users/users.schemas';
 

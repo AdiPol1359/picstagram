@@ -2,7 +2,8 @@ import { signUpFormSchema } from './SignUpForm.schemas';
 
 import { useCreateUser } from '@/hooks/useCreateUser';
 import { useZodForm } from '@/hooks/useZodForm';
-import { capitalize, isObjectKey } from '@/lib/utils/utils';
+import { isObjectKey } from '@/lib/utils/object';
+import { capitalize } from '@/lib/utils/string';
 
 interface Options {
 	readonly onSuccess?: () => void;
