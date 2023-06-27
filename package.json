@@ -41,6 +41,7 @@
 		"zod": "3.21.4"
 	},
 	"devDependencies": {
+		"@csstools/postcss-oklab-function": "2.2.3",
 		"@storybook/addon-essentials": "7.0.22",
 		"@storybook/addon-interactions": "7.0.22",
 		"@storybook/addon-links": "7.0.22",
