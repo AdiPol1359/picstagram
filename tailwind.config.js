@@ -13,7 +13,7 @@ module.exports = {
 			},
 			colors: {
 				primary: {
-					DEFAULT: '#fe67bA',
+					DEFAULT: 'oklch(72.67% 0.202 349.21)',
 					50: 'oklch(97% 0.202 349.21)',
 					100: 'oklch(94% 0.202 349.21)',
 					200: 'oklch(87.5% 0.202 349.21)',
